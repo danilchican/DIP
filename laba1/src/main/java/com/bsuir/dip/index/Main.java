@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args) {
         Image image = new Image();
         image.setImg(ImageLoader.load("D:/zm.jpg"));
+        image.show();
+
         ImageLoader.save("D:/result.jpg", image);
     }
 }

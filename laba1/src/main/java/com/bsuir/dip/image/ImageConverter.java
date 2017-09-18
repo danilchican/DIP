@@ -42,13 +42,7 @@ public final class ImageConverter {
      */
     public static int[] convertToPixels(Image image) {
         byte[] bytes = convertToBytes(image);
-        int[] pixels = new int[bytes.length];
-
-        for (int i = 0; i < bytes.length; i++) {
-            pixels[i] = bytes[i] & 0xFF;
-        }
-
-        return pixels;
+        return convertToPixels(bytes);
     }
 
     /**

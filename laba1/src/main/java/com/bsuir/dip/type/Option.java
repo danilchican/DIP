@@ -1,4 +1,7 @@
-package com.bsuir.dip;
+package com.bsuir.dip.type;
+
+import com.bsuir.dip.action.Action;
+import com.bsuir.dip.action.HistogramAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,17 +9,18 @@ import java.util.List;
 
 public enum Option {
 
-    VIEW_IMAGE(0, "View Image"),
-    VIEW_HIST(1, "View Histogram"),
-    TRANSLATION(2, "Translate"),
-    FILTERING(3, "Filter");
+    VIEW_IMAGE(0, "View Image", new HistogramAction()),
+    VIEW_HIST(1, "View Histogram", new HistogramAction()), // change action
+    TRANSLATION(2, "Translate", new HistogramAction()); // change action
 
     private int id;
     private String title;
+    private Action handler;
 
-    Option(int id, String title) {
+    Option(int id, String title, Action handler) {
         this.id = id;
         this.title = title;
+        this.handler = handler;
     }
 
     public int getId() {
@@ -25,6 +29,10 @@ public enum Option {
 
     public String getTitle() {
         return title;
+    }
+
+    public Action getAction() {
+        return handler;
     }
 
     public static Option findById(int id) {

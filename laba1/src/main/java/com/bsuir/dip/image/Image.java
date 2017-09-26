@@ -1,6 +1,6 @@
 package com.bsuir.dip.image;
 
-import com.bsuir.dip.action.Imshow;
+import com.bsuir.dip.drawing.Imshow;
 import com.bsuir.dip.drawing.ImageHistogram;
 import org.opencv.core.Mat;
 

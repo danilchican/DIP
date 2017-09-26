@@ -1,6 +1,7 @@
 package com.bsuir.dip.drawing;
 
-import com.bsuir.dip.Option;
+import com.bsuir.dip.type.Option;
+import com.bsuir.dip.action.IAction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -50,9 +51,9 @@ public class Window {
     private ObservableList<String> histograms;
     private ObservableList<String> translations;
 
-    private final ComboBox optionsBox;
-    private final ComboBox histogramsBox;
-    private final ComboBox translationsBox;
+    public final ComboBox optionsBox;
+    public final ComboBox histogramsBox;
+    public final ComboBox translationsBox;
 
     public Window(Stage stage) {
         this.stage = stage;
@@ -81,7 +82,7 @@ public class Window {
         translationsBox = new ComboBox<>(translations);
     }
 
-    public void draw() {
+    public void show() {
         stage.setTitle(WINDOW_TITLE);
 
         this.fillScene();
@@ -138,7 +139,33 @@ public class Window {
             if (t1 != null) {
                 int id = optionsBox.getSelectionModel().getSelectedIndex();
                 Option option = Option.findById(id);
+
+                this.handleByOption(option);
             }
         });
+    }
+
+    private void handleByOption(Option option) {
+        System.out.println("Selected option: " + option.getTitle());
+
+        switch(option) {
+            case VIEW_IMAGE:
+                histogramsBox.setDisable(false);
+                translationsBox.setDisable(false);
+                break;
+            case VIEW_HIST:
+                histogramsBox.setDisable(false);
+                translationsBox.setDisable(true);
+                break;
+            case TRANSLATION:
+                histogramsBox.setDisable(true);
+                translationsBox.setDisable(false);
+                break;
+            default:
+                throw new IllegalArgumentException("Option was not found");
+        }
+
+        IAction action = option.getAction();
+        action.execute();
     }
 }

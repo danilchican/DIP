@@ -1,4 +1,4 @@
-package com.bsuir.dip.action;
+package com.bsuir.dip.drawing;
 
 /*
  * Author: ATUL

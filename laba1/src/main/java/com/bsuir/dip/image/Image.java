@@ -83,6 +83,13 @@ public class Image {
         System.out.println("Can't show image. Mat obj is empty!");
     }
 
+    public void execBinPreparing(int threshold) {
+        int[] pixels = ImageConverter.convertToPixels(this);
+        int[] binary = ImageCalculator.calcBinaryPreparing(pixels, threshold);
+
+        this.img.put(0, 0, ImageConverter.convertToBytes(binary));
+    }
+
     /**
      * Show image histogram.
      */

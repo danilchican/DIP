@@ -3,12 +3,6 @@ package com.bsuir.dip.image;
 import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class ImageCalculator {
 
     private static final int HIST_WIDTH = 256;
@@ -73,20 +67,21 @@ public class ImageCalculator {
      * @return computed pixels
      */
     public static int[] calcSobel(Image image) {
+        Mat oldImg = image.getImg();
         Mat img = new Mat();
-        image.getImg().copyTo(img);
+        oldImg.copyTo(img);
 
         for (int i = 1; i < image.getHeight() - 1; i++) {
             for (int j = 1; j < image.getWidth() - 1; j++) {
-                int redChannel = calcSobelChannel(j, i, img, Channel.RED);
+                int blueChannel = calcSobelChannel(i, j, oldImg, Channel.BLUE);
 
                 if (image.isGrayScale()) {
-                    img.put(i, j, redChannel);
+                    img.put(i, j, blueChannel);
                     continue;
                 }
 
-                int greenChannel = calcSobelChannel(j, i, img, Channel.GREEN);
-                int blueChannel = calcSobelChannel(j, i, img, Channel.BLUE);
+                int greenChannel = calcSobelChannel(i, j, oldImg, Channel.GREEN);
+                int redChannel = calcSobelChannel(i, j, oldImg, Channel.RED);
 
                 double[] pix = new double[]{redChannel, greenChannel, blueChannel};
 
@@ -97,7 +92,7 @@ public class ImageCalculator {
         return ImageConverter.convertToPixels(new Image(img));
     }
 
-    private static int calcSobelChannel(final int i, final int j, final Mat image, Channel channel) {
+    private static int calcSobelChannel(final int j, final int i, final Mat image, Channel channel) {
         final int[] core1 = {
                 1, 0, -1,
                 2, 0, -2,
@@ -111,6 +106,7 @@ public class ImageCalculator {
         };
 
         final int index = channel.getIndex();
+        System.out.println("j = " + j + ", i = " + i);
 
         int h1 = (int) (core1[0] * image.get(j - 1, i - 1)[index]
                 + core1[1] * image.get(j, i - 1)[index]

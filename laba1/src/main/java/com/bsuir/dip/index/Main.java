@@ -23,12 +23,15 @@ public class Main extends Application {
         //Window window = new Window(stage);
         //window.show();
 
-        Image image = new Image(ImageLoader.load("D:/zm.jpg"));
+        Image image = new Image(ImageLoader.load("D:/test.png"));
 
         //image.execBinPreparing(130);
         //image.execPreparing(80, 130);
-        image.execSobel();
-        image.show();
+
+        Image gs = ImageConverter.convertToGS(image);
+
+        gs.execSobel();
+        gs.show();
         //image.showHistogram(Channel.ALL);
 
 //        Image gs = ImageConverter.convertToGS(image);

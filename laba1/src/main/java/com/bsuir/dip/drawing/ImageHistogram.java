@@ -48,8 +48,6 @@ public final class ImageHistogram {
                 .build();
 
         chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
-        chart.getStyler().setHasAnnotations(true);
-
         chart.addSeries(SERIES_TITLE, xAxis, yAxis);
 
         return chart;

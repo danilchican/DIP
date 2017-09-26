@@ -1,6 +1,9 @@
 package com.bsuir.dip.index;
 
 import com.bsuir.dip.drawing.Window;
+import com.bsuir.dip.image.Image;
+import com.bsuir.dip.image.ImageLoader;
+import com.bsuir.dip.type.Channel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import nu.pattern.OpenCV;
@@ -16,14 +19,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Window window = new Window(stage);
-        window.show();
+        //Window window = new Window(stage);
+        //window.show();
 
-//        Image image = new Image();
-//        image.setImg(ImageLoader.load("D:/zm.jpg"));
-//
-//        image.show();
-//        image.showHistogram();
+        Image image = new Image(ImageLoader.load("D:/zm.jpg"));
+
+        image.show();
+        image.showHistogram(Channel.ALL);
 
         //ImageLoader.save("D:/result.jpg", image);
     }

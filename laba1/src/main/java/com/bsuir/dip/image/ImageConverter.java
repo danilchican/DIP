@@ -19,6 +19,17 @@ public final class ImageConverter {
     }
 
     /**
+     * Convert Image to pixels as int array.
+     *
+     * @param image to convert
+     * @return pixels array
+     */
+    public static int[] convertToPixels(Image image) {
+        byte[] bytes = convertToBytes(image);
+        return convertToPixels(bytes);
+    }
+
+    /**
      * Convert image pixels to bytes array.
      *
      * @param pixels to convert
@@ -32,17 +43,6 @@ public final class ImageConverter {
         }
 
         return bytes;
-    }
-
-    /**
-     * Convert Image to pixels as int array.
-     *
-     * @param image to convert
-     * @return pixels array
-     */
-    public static int[] convertToPixels(Image image) {
-        byte[] bytes = convertToBytes(image);
-        return convertToPixels(bytes);
     }
 
     /**

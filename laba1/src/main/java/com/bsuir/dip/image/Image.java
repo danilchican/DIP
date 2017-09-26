@@ -2,6 +2,7 @@ package com.bsuir.dip.image;
 
 import com.bsuir.dip.drawing.Imshow;
 import com.bsuir.dip.drawing.ImageHistogram;
+import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
 import java.util.ArrayList;
@@ -19,14 +20,47 @@ public class Image {
     private int width;
     private int height;
 
-    private static final int CHANNELS = 3;
+    private int channels = 3;
 
-    public void setImg(Mat img) {
+    public Image(Mat img) {
         this.img = img;
+
+        width = img.width();
+        height = img.height();
+
+        channels = img.channels();
+    }
+
+    public Image(Mat img, String title) {
+        this(img);
+        this.title = title;
     }
 
     public Mat getImg() {
         return img;
+    }
+
+    /**
+     * Get data of concrete channel.
+     *
+     * @param channel
+     * @return pixels
+     */
+    public int[] getChannel(Channel channel) {
+        List<Integer> pixels = new ArrayList<>();
+        int index = channel.getIndex();
+
+        if (channel == Channel.ALL) {
+            return ImageConverter.convertToPixels(this);
+        }
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                pixels.add((int) img.get(i, j)[index]);
+            }
+        }
+
+        return pixels.stream().mapToInt(i -> i).toArray();
     }
 
     /**
@@ -44,15 +78,16 @@ public class Image {
     /**
      * Show image histogram.
      */
-    public void showHistogram() {
-        HashMap<String, List<Integer>> map = this.calcImageHistogram();
+    public void showHistogram(Channel channel) {
+        HashMap<String, List<Integer>> map = this.calcImageHistogram(channel);
 
         ImageHistogram histogram = new ImageHistogram(title, map.get(X_AXIS_NAME), map.get(Y_AXIS_NAME));
         histogram.show();
     }
 
-    private HashMap<String, List<Integer>> calcImageHistogram() {
-        int[] pixels = ImageConverter.convertToPixels(this);
+    private HashMap<String, List<Integer>> calcImageHistogram(Channel channel) {
+        int[] pixels = getChannel(channel);
+        int[] histData = ImageCalculator.calcChannelHist(pixels);
 
         HashMap<String, List<Integer>> map = new HashMap<String, List<Integer>>() {{
             put(X_AXIS_NAME, new ArrayList<>());
@@ -60,20 +95,6 @@ public class Image {
         }};
 
         final int startValue = 0;
-
-        int frequency = startValue;
-        int xMin = pixels[0];
-        int xMax = xMin;
-
-        for (int pixel : pixels) {
-            if (xMin > pixel) {
-                xMin = pixel;
-            }
-
-            if (xMax < pixel) {
-                xMax = pixel;
-            }
-        }
 
         map.get(X_AXIS_NAME).add(startValue);
         map.get(Y_AXIS_NAME).add(startValue);
@@ -83,19 +104,9 @@ public class Image {
             map.get(Y_AXIS_NAME).add(startValue);
         }
 
-        for (int i = 0; i < INTERVAL_COUNT - 1; i++) {
-            for (int pixel : pixels) {
-                if (pixel >= map.get(X_AXIS_NAME).get(i)
-                        && pixel < map.get(X_AXIS_NAME).get(i + 1)) {
-                    map.get(Y_AXIS_NAME).set(i, map.get(Y_AXIS_NAME).get(i) + 1);
-                }
 
-                if (frequency < map.get(Y_AXIS_NAME).get(i)) {
-                    frequency = map.get(Y_AXIS_NAME).get(i);
-                }
-            }
-
-            map.get(Y_AXIS_NAME).set(i, map.get(Y_AXIS_NAME).get(i) / pixels.length);
+        for (int i = 0; i < histData.length; i++) {
+            map.get(Y_AXIS_NAME).set(i, histData[i]);
         }
 
         System.out.println("Histogram calculated");

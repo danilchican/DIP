@@ -24,7 +24,10 @@ public class Main extends Application {
         //window.show();
 
         Image image = new Image(ImageLoader.load("D:/zm.jpg"));
-        image.execBinPreparing(130);
+
+        //image.execBinPreparing(130);
+        //image.execPreparing(80, 130);
+        image.execSobel();
         image.show();
         //image.showHistogram(Channel.ALL);
 

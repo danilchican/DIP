@@ -48,6 +48,10 @@ public class Image {
         return height;
     }
 
+    public boolean isGrayScale() {
+        return channels == 1;
+    }
+
     /**
      * Get data of concrete channel.
      *
@@ -83,11 +87,39 @@ public class Image {
         System.out.println("Can't show image. Mat obj is empty!");
     }
 
-    public void execBinPreparing(int threshold) {
-        int[] pixels = ImageConverter.convertToPixels(this);
-        int[] binary = ImageCalculator.calcBinaryPreparing(pixels, threshold);
+    /**
+     * Execute binary preparing.
+     *
+     * @param threshold
+     */
+    public void execBinPreparing(final int threshold) {
+        final int[] pixels = ImageConverter.convertToPixels(this);
+        final int[] binary = ImageCalculator.calcBinaryPreparing(pixels, threshold);
 
         this.img.put(0, 0, ImageConverter.convertToBytes(binary));
+    }
+
+    /**
+     * Execute preparing.
+     *
+     * @param left
+     * @param right
+     */
+    public void execPreparing(final int left, final int right) {
+        final int[] pixels = ImageConverter.convertToPixels(this);
+        final int[] binary = ImageCalculator.calcPreparing(pixels, left, right);
+
+        this.img.put(0, 0, ImageConverter.convertToBytes(binary));
+    }
+
+    /**
+     * Execute Sobel operator filter.
+     */
+    public void execSobel() {
+        final int[] pixels = ImageConverter.convertToPixels(this);
+        final int[] sobel = ImageCalculator.calcSobel(this);
+
+        this.img.put(0, 0, ImageConverter.convertToBytes(sobel));
     }
 
     /**

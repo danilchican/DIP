@@ -1,10 +1,8 @@
 package com.bsuir.dip.image;
 
-import java.util.Arrays;
-
 public class ImageCalculator {
 
-    private static final int HIST_SIZE = 256;
+    private static final int HIST_WIDTH = 256;
 
     /**
      * Calculate histogram data.
@@ -13,7 +11,7 @@ public class ImageCalculator {
      * @return
      */
     public static int[] calcChannelHist(int[] pixels) {
-        int[] hist = new int[HIST_SIZE];
+        int[] hist = new int[HIST_WIDTH];
 
         for (int pixel : pixels) {
             hist[pixel] += 1;

@@ -40,6 +40,14 @@ public class Image {
         return img;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     /**
      * Get data of concrete channel.
      *

@@ -2,6 +2,7 @@ package com.bsuir.dip.index;
 
 import com.bsuir.dip.drawing.Window;
 import com.bsuir.dip.image.Image;
+import com.bsuir.dip.image.ImageConverter;
 import com.bsuir.dip.image.ImageLoader;
 import com.bsuir.dip.type.Channel;
 import javafx.application.Application;
@@ -23,10 +24,13 @@ public class Main extends Application {
         //window.show();
 
         Image image = new Image(ImageLoader.load("D:/zm.jpg"));
-
         image.show();
         image.showHistogram(Channel.ALL);
 
-        //ImageLoader.save("D:/result.jpg", image);
+        Image gs = ImageConverter.convertToGS(image);
+        gs.show();
+        gs.showHistogram(Channel.ALL);
+
+        ImageLoader.save("D:/gs.jpg", gs);
     }
 }

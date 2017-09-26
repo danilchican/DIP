@@ -5,7 +5,19 @@
   <groupId>com.bsuir.dip</groupId>
   <artifactId>Laba1</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>jar</packaging>
 
   <name>Laba1</name>
   <url>http://maven.apache.org</url>
@@ -19,6 +31,11 @@
       <groupId>org.openpnp</groupId>
       <artifactId>opencv</artifactId>
       <version>3.2.0-0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.knowm.xchart</groupId>
+      <artifactId>xchart</artifactId>
+      <version>3.5.0</version>
     </dependency>
   </dependencies>
 </project>

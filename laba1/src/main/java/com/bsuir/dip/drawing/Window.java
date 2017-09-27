@@ -1,5 +1,7 @@
 package com.bsuir.dip.drawing;
 
+import com.bsuir.dip.action.HistogramAction;
+import com.bsuir.dip.type.HistogramItem;
 import com.bsuir.dip.type.Option;
 import com.bsuir.dip.action.IAction;
 import javafx.collections.FXCollections;
@@ -7,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -28,6 +27,7 @@ public class Window {
     private static final String OPEN_FILE_BTN_TITLE = "Choose image...";
     private static final String SAVE_FILE_BTN_TITLE = "Save image";
     private static final String FILE_PREFIX = "file:///";
+    private static final String DEFAULT_BG_IMAGE_PATH = "image_bg.jpg";
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
@@ -47,13 +47,11 @@ public class Window {
     private final Label histogramLabel;
     private final Label translateLabel;
 
-    private ObservableList<String> options;
-    private ObservableList<String> histograms;
-    private ObservableList<String> translations;
+    private final ComboBox optionsBox;
+    private final ComboBox histogramsBox;
+    private final ComboBox translationsBox;
 
-    public final ComboBox optionsBox;
-    public final ComboBox histogramsBox;
-    public final ComboBox translationsBox;
+    private Image image;
 
     public Window(Stage stage) {
         this.stage = stage;
@@ -71,9 +69,9 @@ public class Window {
         histogramLabel = new Label("Histogram:");
         translateLabel = new Label("Translate:");
 
-        options = FXCollections.observableArrayList(Option.getAsArray());
-        histograms = FXCollections.observableArrayList("", "GrayScale", "R", "G", "B");
-        translations = FXCollections.observableArrayList("", "GrayScale", "Preparing", "Sobiel operator");
+        ObservableList<String> options = FXCollections.observableArrayList(Option.getAsArray());
+        ObservableList<String> histograms = FXCollections.observableArrayList(HistogramItem.getAsArray());
+        ObservableList<String> translations = FXCollections.observableArrayList("", "GrayScale", "Preparing", "Sobiel operator");
 
         optionsBox = new ComboBox<>(options);
         optionsBox.getSelectionModel().selectFirst();
@@ -112,7 +110,7 @@ public class Window {
         leftBar.getChildren().addAll(histogramLabel, histogramsBox);
         leftBar.getChildren().addAll(translateLabel, translationsBox);
 
-        Image image = new Image(FILE_PREFIX + "D:/VLAD/image_bg.jpg");
+        Image image = new Image(DEFAULT_BG_IMAGE_PATH);
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
 
@@ -120,12 +118,16 @@ public class Window {
         mainLayout.getItems().addAll(leftBar, rightBar);
     }
 
+    public Image getImage() {
+        return image;
+    }
+
     private void setActions() {
         openFileBtn.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(stage);
-
+            // TODO change
             if (file.exists()) {
-                Image image = new Image(FILE_PREFIX + file.getAbsolutePath());
+                image = new Image(FILE_PREFIX + file.getAbsolutePath());
 
                 if (image.getWidth() > 300) {
                     imageView.setFitWidth(300);
@@ -135,23 +137,50 @@ public class Window {
             }
         });
 
-        optionsBox.getSelectionModel().selectedItemProperty().addListener((ov, t, t1) -> {
-            if (t1 != null) {
-                int id = optionsBox.getSelectionModel().getSelectedIndex();
-                Option option = Option.findById(id);
+        optionsBox
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ov, t, t1) -> {
+                    if (t1 != null) {
+                        int id = optionsBox.getSelectionModel().getSelectedIndex();
+                        Option option = Option.findById(id);
 
-                this.handleByOption(option);
-            }
-        });
+                        this.handleByOption(option);
+                    }
+                });
+
+        histogramsBox
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ov, t, t1) -> {
+                    if (t1 != null) {
+                        int id = histogramsBox.getSelectionModel().getSelectedIndex();
+                        HistogramItem item = HistogramItem.findById(id);
+
+                        this.handleByHistogramItem(item);
+                    }
+                });
+
+        translationsBox
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ov, t, t1) -> {
+                    if (t1 != null) {
+                        int id = translationsBox.getSelectionModel().getSelectedIndex();
+                        Option option = Option.findById(id);
+
+                        this.handleByOption(option);
+                    }
+                });
     }
 
     private void handleByOption(Option option) {
         System.out.println("Selected option: " + option.getTitle());
 
-        switch(option) {
+        switch (option) {
             case VIEW_IMAGE:
-                histogramsBox.setDisable(false);
-                translationsBox.setDisable(false);
+                histogramsBox.setDisable(true);
+                translationsBox.setDisable(true);
                 break;
             case VIEW_HIST:
                 histogramsBox.setDisable(false);
@@ -166,6 +195,34 @@ public class Window {
         }
 
         IAction action = option.getAction();
+
+        if (action != null) {
+            action.execute();
+        }
+    }
+
+    private void handleByHistogramItem(HistogramItem item) {
+        System.out.println("Selected histogram item: " + item.getTitle());
+        HistogramAction action = new HistogramAction();
         action.execute();
+
+        switch (item) {
+            case EMPTY:
+                break;
+            case GRAYSCALE:
+                action.executeGS();
+                break;
+            case R:
+                action.executeR();
+                break;
+            case G:
+                action.executeG();
+                break;
+            case B:
+                action.executeB();
+                break;
+            default:
+                throw new IllegalArgumentException("Histogram item was not found");
+        }
     }
 }

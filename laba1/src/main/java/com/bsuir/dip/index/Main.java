@@ -14,24 +14,26 @@ public class Main extends Application {
         OpenCV.loadLocally();
     }
 
+    public static Window window;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) {
-        //Window window = new Window(stage);
-        //window.show();
+        window = new Window(stage);
+        window.show();
 
-        Image image = new Image(ImageLoader.load("D:/test.png"));
+        //Image image = new Image(ImageLoader.load("D:/test.png"));
 
         //image.execBinPreparing(130);
         //image.execPreparing(80, 130);
 
-        Image gs = ImageConverter.convertToGS(image);
+        //Image gs = ImageConverter.convertToGS(image);
 
-        gs.execSobel();
-        gs.show();
+        //gs.execSobel();
+        //gs.show();
         //image.showHistogram(Channel.ALL);
 
 //        Image gs = ImageConverter.convertToGS(image);

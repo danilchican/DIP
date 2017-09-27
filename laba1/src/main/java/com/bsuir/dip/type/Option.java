@@ -2,16 +2,16 @@ package com.bsuir.dip.type;
 
 import com.bsuir.dip.action.Action;
 import com.bsuir.dip.action.HistogramAction;
+import com.bsuir.dip.action.TranslationAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public enum Option {
-
     VIEW_IMAGE(0, "View Image", null),
-    VIEW_HIST(1, "View Histogram", new HistogramAction()), // change action
-    TRANSLATION(2, "Translate", new HistogramAction()); // change action
+    VIEW_HIST(1, "View Histogram", new HistogramAction()),
+    TRANSLATION(2, "Translate Image", new TranslationAction());
 
     private int id;
     private String title;

@@ -1,12 +1,14 @@
 package com.bsuir.dip.drawing;
 
 import com.bsuir.dip.action.HistogramAction;
+import com.bsuir.dip.action.TranslationAction;
 import com.bsuir.dip.image.Image;
 import com.bsuir.dip.image.ImageLoader;
 import com.bsuir.dip.type.Channel;
 import com.bsuir.dip.type.HistogramItem;
 import com.bsuir.dip.type.Option;
 import com.bsuir.dip.action.IAction;
+import com.bsuir.dip.type.Translation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -80,7 +82,7 @@ public class Window {
 
         ObservableList<String> options = FXCollections.observableArrayList(Option.getAsArray());
         ObservableList<String> histograms = FXCollections.observableArrayList(HistogramItem.getAsArray());
-        ObservableList<String> translations = FXCollections.observableArrayList("", "GrayScale", "Preparing", "Sobiel operator");
+        ObservableList<String> translations = FXCollections.observableArrayList(Translation.getAsArray());
 
         optionsBox = new ComboBox<>(options);
         optionsBox.getSelectionModel().selectFirst();
@@ -130,6 +132,10 @@ public class Window {
 
     public Image getImage() {
         return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     private void setActions() {
@@ -211,9 +217,9 @@ public class Window {
                 .addListener((ov, t, t1) -> {
                     if (t1 != null) {
                         int id = translationsBox.getSelectionModel().getSelectedIndex();
-                        Option option = Option.findById(id);
-                        // TODO change
-                        this.handleByOption(option);
+                        Translation item = Translation.findById(id);
+
+                        this.handleByTranslateItem(item);
                     }
                 });
     }
@@ -270,6 +276,31 @@ public class Window {
                 break;
             default:
                 throw new IllegalArgumentException("Histogram item was not found");
+        }
+    }
+
+    private void handleByTranslateItem(Translation item) {
+        System.out.println("Selected translation item: " + item.getTitle());
+        TranslationAction action = new TranslationAction();
+        action.execute();
+
+        switch (item) {
+            case EMPTY:
+                break;
+            case GRAYSCALE:
+                action.executeGS();
+                break;
+            case BIN_PREPARING:
+                action.executeBinPreparing();
+                break;
+            case PREPARING:
+                action.executePreparing();
+                break;
+            case SOBIEL:
+                action.executeSobiel();
+                break;
+            default:
+                throw new IllegalArgumentException("Translation item was not found");
         }
     }
 }

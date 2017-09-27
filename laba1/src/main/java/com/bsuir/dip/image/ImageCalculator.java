@@ -3,7 +3,7 @@ package com.bsuir.dip.image;
 import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
-class ImageCalculator {
+public class ImageCalculator {
 
     private static final int HIST_WIDTH = 256;
     private static final int MAX_PIX_VALUE = HIST_WIDTH - 1;

@@ -5,6 +5,7 @@ import com.bsuir.dip.drawing.ImageHistogram;
 import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +81,10 @@ public class Image {
      */
     public void show() {
         if (!getImg().empty()) {
-            new Imshow(title).showImage(getImg());
+            Imshow showHandler = new Imshow(title);
+            showHandler.setCloseOption(WindowConstants.HIDE_ON_CLOSE);
+            showHandler.showImage(getImg());
+
             return;
         }
 

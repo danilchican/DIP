@@ -8,9 +8,10 @@ public enum HistogramItem {
 
     EMPTY(0, ""),
     GRAYSCALE(1, "GrayScale"),
-    R(2, "R"),
-    G(3, "G"),
-    B(4, "B");
+    RGB(2, "RGB"),
+    R(3, "R"),
+    G(4, "G"),
+    B(5, "B");
 
     private int id;
     private String title;

@@ -22,7 +22,7 @@ public class HistogramAction extends Action {
         System.out.println("Histogram action.");
         Image image = window.getImage();
 
-        if(image == null) {
+        if (image == null) {
             isEmptyImage = true;
 
             new Dialog(
@@ -35,10 +35,10 @@ public class HistogramAction extends Action {
     }
 
     public void executeGS() {
-        System.out.println("Execute GS");
+        System.out.println("Execute show histogram by channel: GS");
 
-        if(!isEmptyImage) {
-            if(!image.isGrayScale()) {
+        if (!isEmptyImage) {
+            if (!image.isGrayScale()) {
                 image = ImageConverter.convertToGS(image);
             }
 
@@ -46,21 +46,20 @@ public class HistogramAction extends Action {
         }
     }
 
-    public void executeR() {
-        if(!isEmptyImage) {
-            System.out.println("Execute R");
-        }
-    }
+    public void executeByChannel(Channel channel) {
+        System.out.println("Execute show histogram by channel: " + channel);
 
-    public void executeG() {
-        if(!isEmptyImage) {
-            System.out.println("Execute G");
-        }
-    }
+        if (!isEmptyImage) {
+            if (image.isGrayScale()) {
+                new Dialog(
+                        Alert.AlertType.ERROR, "Error",
+                        null, "Image is not in RGB colors."
+                ).show();
 
-    public void executeB() {
-        if(!isEmptyImage) {
-            System.out.println("Execute B");
+                return;
+            }
+
+            image.showHistogram(channel);
         }
     }
 }

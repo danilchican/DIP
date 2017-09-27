@@ -116,7 +116,6 @@ public class Image {
      * Execute Sobel operator filter.
      */
     public void execSobel() {
-        final int[] pixels = ImageConverter.convertToPixels(this);
         final int[] sobel = ImageCalculator.calcSobel(this);
 
         this.img.put(0, 0, ImageConverter.convertToBytes(sobel));

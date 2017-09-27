@@ -3,6 +3,7 @@ package com.bsuir.dip.drawing;
 import com.bsuir.dip.action.HistogramAction;
 import com.bsuir.dip.image.Image;
 import com.bsuir.dip.image.ImageLoader;
+import com.bsuir.dip.type.Channel;
 import com.bsuir.dip.type.HistogramItem;
 import com.bsuir.dip.type.Option;
 import com.bsuir.dip.action.IAction;
@@ -214,14 +215,17 @@ public class Window {
             case GRAYSCALE:
                 action.executeGS();
                 break;
+            case RGB:
+                action.executeByChannel(Channel.ALL);
+                break;
             case R:
-                action.executeR();
+                action.executeByChannel(Channel.RED);
                 break;
             case G:
-                action.executeG();
+                action.executeByChannel(Channel.GREEN);
                 break;
             case B:
-                action.executeB();
+                action.executeByChannel(Channel.BLUE);
                 break;
             default:
                 throw new IllegalArgumentException("Histogram item was not found");

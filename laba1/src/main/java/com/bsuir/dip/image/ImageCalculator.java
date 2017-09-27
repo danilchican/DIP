@@ -106,7 +106,6 @@ public class ImageCalculator {
         };
 
         final int index = channel.getIndex();
-        System.out.println("j = " + j + ", i = " + i);
 
         int h1 = (int) (core1[0] * image.get(j - 1, i - 1)[index]
                 + core1[1] * image.get(j, i - 1)[index]

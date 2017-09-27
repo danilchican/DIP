@@ -34,6 +34,7 @@ public class Window {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
     private static final int LAYOUT_PADDING = 10;
+    private static final int MAX_PREVIEW_WIDTH = 300;
 
     private final VBox leftBar;
     private final VBox rightBar;
@@ -58,6 +59,12 @@ public class Window {
     public Window(Stage stage) {
         this.stage = stage;
         fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.jpg", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
         imageView = new ImageView();
 
         openFileBtn = new Button(OPEN_FILE_BTN_TITLE);
@@ -98,6 +105,7 @@ public class Window {
     private void fillScene() {
         histogramsBox.setDisable(true);
         translationsBox.setDisable(true);
+        saveFileBtn.setDisable(true);
 
         mainLayout.setOrientation(Orientation.HORIZONTAL);
         mainLayout.setDividerPositions(0.5);
@@ -127,17 +135,50 @@ public class Window {
     private void setActions() {
         openFileBtn.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(stage);
-            // TODO change
-            if (file.exists()) {
+
+            if (file != null && file.exists()) {
                 javafx.scene.image.Image displayingImage = new javafx.scene.image.Image(FILE_PREFIX + file.getAbsolutePath());
                 this.image = new Image(ImageLoader.load(file.getAbsolutePath()));
 
-                if (displayingImage.getWidth() > 300) {
-                    imageView.setFitWidth(300);
+                if (displayingImage.getWidth() > MAX_PREVIEW_WIDTH) {
+                    imageView.setFitWidth(MAX_PREVIEW_WIDTH);
                 }
 
                 imageView.setImage(displayingImage);
+                saveFileBtn.setDisable(false);
             }
+        });
+
+        saveFileBtn.setOnAction(event -> {
+            saveFileBtn.setDisable(true);
+
+            if (image == null) {
+                new Dialog(
+                        Alert.AlertType.ERROR, "Error",
+                        null, "Image is not selected."
+                ).show();
+
+                saveFileBtn.setDisable(false);
+                return;
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle(SAVE_FILE_BTN_TITLE);
+            fileChooser.getExtensionFilters()
+                    .add(new FileChooser.ExtensionFilter("Image (*.jpg, *.png)", "*.jpg", "*.png"));
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null) {
+                ImageLoader.save(file.getAbsolutePath(), image);
+
+                new Dialog(
+                        Alert.AlertType.INFORMATION, "Success",
+                        null, "Image has been saved."
+                ).show();
+            }
+
+            saveFileBtn.setDisable(false);
         });
 
         optionsBox

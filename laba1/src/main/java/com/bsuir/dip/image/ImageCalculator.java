@@ -3,7 +3,7 @@ package com.bsuir.dip.image;
 import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
-public class ImageCalculator {
+class ImageCalculator {
 
     private static final int HIST_WIDTH = 256;
     private static final int MAX_PIX_VALUE = HIST_WIDTH - 1;
@@ -13,7 +13,7 @@ public class ImageCalculator {
      * Calculate histogram data.
      *
      * @param pixels
-     * @return
+     * @return histogram data yAxis
      */
     public static int[] calcChannelHist(int[] pixels) {
         int[] hist = new int[HIST_WIDTH];

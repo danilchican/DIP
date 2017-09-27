@@ -1,10 +1,6 @@
 package com.bsuir.dip.index;
 
 import com.bsuir.dip.drawing.Window;
-import com.bsuir.dip.image.Image;
-import com.bsuir.dip.image.ImageConverter;
-import com.bsuir.dip.image.ImageLoader;
-import com.bsuir.dip.type.Channel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import nu.pattern.OpenCV;

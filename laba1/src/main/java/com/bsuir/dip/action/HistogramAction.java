@@ -6,6 +6,7 @@ import com.bsuir.dip.type.Channel;
 import javafx.scene.control.Alert;
 
 public class HistogramAction extends Action {
+
     public void executeGS() {
         System.out.println("Execute show histogram by channel: GS");
 

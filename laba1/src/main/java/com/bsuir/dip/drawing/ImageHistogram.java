@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.util.List;
 
 public final class ImageHistogram {
+
     private final String title;
 
     private static final String X_AXIS_TITLE = "Pixels";

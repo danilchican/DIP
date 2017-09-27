@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Translation {
+
     EMPTY(0, ""),
     GRAYSCALE(1, "GrayScale"),
     BIN_PREPARING(2, "Binary Preparing"),

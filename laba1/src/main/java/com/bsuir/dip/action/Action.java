@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import static com.bsuir.dip.index.Main.window;
 
 public abstract class Action implements IAction {
+
     boolean isEmptyImage = false;
     Image image;
 

@@ -15,6 +15,7 @@ import static com.bsuir.dip.drawing.ImageHistogram.X_AXIS_NAME;
 import static com.bsuir.dip.drawing.ImageHistogram.Y_AXIS_NAME;
 
 public class Image {
+
     private Mat img;
     private String title = "No title Image";
 

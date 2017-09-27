@@ -188,10 +188,6 @@ public class Window {
         return lastImage;
     }
 
-    public Button getShowImageBtn() {
-        return showImageBtn;
-    }
-
     private void setActions() {
         openFileBtn.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(stage);

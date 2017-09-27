@@ -20,7 +20,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgcodecs.Imgcodecs;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 public class Window {
@@ -28,8 +33,12 @@ public class Window {
     final private Stage stage;
 
     private static final String WINDOW_TITLE = "DIP Lab1";
+
     private static final String OPEN_FILE_BTN_TITLE = "Choose image...";
     private static final String SAVE_FILE_BTN_TITLE = "Save image";
+    private static final String EXECUTE_BTN_TITLE = "Execute";
+    private static final String SHOW_IMAGE_BTN_TITLE = "Show in Window";
+
     private static final String FILE_PREFIX = "file:///";
     private static final String DEFAULT_BG_IMAGE_PATH = "image_bg.jpg";
 
@@ -38,13 +47,17 @@ public class Window {
     private static final int LAYOUT_PADDING = 10;
     private static final int MAX_PREVIEW_WIDTH = 300;
 
-    private final VBox leftBar;
-    private final VBox rightBar;
     private final SplitPane mainLayout;
 
+    private final VBox leftBar;
+    private final VBox rightBar;
+
     private final FileChooser fileChooser;
+
     private final Button openFileBtn;
     private final Button saveFileBtn;
+    private final Button execTranslateBtn;
+    private final Button showImageBtn;
 
     private final ImageView imageView;
 
@@ -52,11 +65,18 @@ public class Window {
     private final Label histogramLabel;
     private final Label translateLabel;
 
+    private Label leftThresholdLabel;
+    private Label rightThresholdLabel;
+
+    private TextField leftLineThreshold;
+    private TextField rightLineThreshold;
+
     private final ComboBox optionsBox;
     private final ComboBox histogramsBox;
     private final ComboBox translationsBox;
 
     private Image image;
+    private Image lastImage;
 
     public Window(Stage stage) {
         this.stage = stage;
@@ -71,6 +91,11 @@ public class Window {
 
         openFileBtn = new Button(OPEN_FILE_BTN_TITLE);
         saveFileBtn = new Button(SAVE_FILE_BTN_TITLE);
+        execTranslateBtn = new Button(EXECUTE_BTN_TITLE);
+        showImageBtn = new Button(SHOW_IMAGE_BTN_TITLE);
+
+        leftLineThreshold = new TextField();
+        rightLineThreshold = new TextField();
 
         leftBar = new VBox();
         rightBar = new VBox();
@@ -105,9 +130,26 @@ public class Window {
     }
 
     private void fillScene() {
+        optionsBox.setDisable(true);
         histogramsBox.setDisable(true);
         translationsBox.setDisable(true);
         saveFileBtn.setDisable(true);
+        showImageBtn.setDisable(true);
+
+        leftLineThreshold.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        rightLineThreshold.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+
+        leftLineThreshold.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                leftLineThreshold.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        rightLineThreshold.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                rightLineThreshold.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
 
         mainLayout.setOrientation(Orientation.HORIZONTAL);
         mainLayout.setDividerPositions(0.5);
@@ -126,7 +168,7 @@ public class Window {
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
 
-        rightBar.getChildren().addAll(imageView, openFileBtn, saveFileBtn);
+        rightBar.getChildren().addAll(imageView, openFileBtn, saveFileBtn, showImageBtn);
         mainLayout.getItems().addAll(leftBar, rightBar);
     }
 
@@ -138,25 +180,46 @@ public class Window {
         this.image = image;
     }
 
+    public void setLastImage(Image lastImage) {
+        this.lastImage = lastImage;
+    }
+
+    public Image getLastImage() {
+        return lastImage;
+    }
+
+    public Button getShowImageBtn() {
+        return showImageBtn;
+    }
+
     private void setActions() {
         openFileBtn.setOnAction(event -> {
             File file = fileChooser.showOpenDialog(stage);
 
             if (file != null && file.exists()) {
                 javafx.scene.image.Image displayingImage = new javafx.scene.image.Image(FILE_PREFIX + file.getAbsolutePath());
-                this.image = new Image(ImageLoader.load(file.getAbsolutePath()));
+                Mat pixs = ImageLoader.load(file.getAbsolutePath());
+
+                this.lastImage = new Image(pixs);
+                this.image = new Image(pixs.clone());
 
                 if (displayingImage.getWidth() > MAX_PREVIEW_WIDTH) {
                     imageView.setFitWidth(MAX_PREVIEW_WIDTH);
                 }
 
                 imageView.setImage(displayingImage);
+                optionsBox.setDisable(false);
                 saveFileBtn.setDisable(false);
+                showImageBtn.setDisable(false);
             }
         });
 
+        showImageBtn.setOnAction(event -> {
+            getLastImage().show();
+        });
+
         saveFileBtn.setOnAction(event -> {
-            saveFileBtn.setDisable(true);
+            image = lastImage;
 
             if (image == null) {
                 new Dialog(
@@ -164,7 +227,6 @@ public class Window {
                         null, "Image is not selected."
                 ).show();
 
-                saveFileBtn.setDisable(false);
                 return;
             }
 
@@ -183,8 +245,6 @@ public class Window {
                         null, "Image has been saved."
                 ).show();
             }
-
-            saveFileBtn.setDisable(false);
         });
 
         optionsBox
@@ -197,6 +257,8 @@ public class Window {
 
                         this.handleByOption(option);
                     }
+
+                    clearTranslationsObject();
                 });
 
         histogramsBox
@@ -209,6 +271,8 @@ public class Window {
 
                         this.handleByHistogramItem(item);
                     }
+
+                    clearTranslationsObject();
                 });
 
         translationsBox
@@ -222,6 +286,21 @@ public class Window {
                         this.handleByTranslateItem(item);
                     }
                 });
+    }
+
+    public void replaceImage() {
+        if(getLastImage() != null && getImage() != getLastImage()) {
+            MatOfByte byteMat = new MatOfByte();
+            Imgcodecs.imencode(".jpg", getLastImage().getImg(), byteMat);
+            javafx.scene.image.Image displayingImage = new javafx.scene.image.Image(new ByteArrayInputStream(byteMat.toArray()));
+
+            if (displayingImage.getWidth() > MAX_PREVIEW_WIDTH) {
+                imageView.setFitWidth(MAX_PREVIEW_WIDTH);
+            }
+
+            imageView.setImage(displayingImage);
+            System.out.println("Image replaced.");
+        }
     }
 
     private void handleByOption(Option option) {
@@ -286,21 +365,60 @@ public class Window {
 
         switch (item) {
             case EMPTY:
+                clearTranslationsObject();
                 break;
             case GRAYSCALE:
+                clearTranslationsObject();
                 action.executeGS();
                 break;
             case BIN_PREPARING:
-                action.executeBinPreparing();
+                clearTranslationsObject();
+                leftThresholdLabel = new Label("Threshold:");
+                leftBar.getChildren().addAll(leftThresholdLabel, leftLineThreshold, execTranslateBtn);
+
+                actionBinPrepExecute();
                 break;
             case PREPARING:
-                action.executePreparing();
+                clearTranslationsObject();
+                leftThresholdLabel = new Label("Left threshold:");
+                rightThresholdLabel = new Label("Right threshold:");
+
+                leftBar.getChildren().addAll(leftThresholdLabel, leftLineThreshold,
+                        rightThresholdLabel, rightLineThreshold, execTranslateBtn);
+                actionPrepExecute();
                 break;
             case SOBIEL:
+                clearTranslationsObject();
                 action.executeSobiel();
                 break;
             default:
                 throw new IllegalArgumentException("Translation item was not found");
         }
+    }
+
+    private void clearTranslationsObject() {
+        leftBar.getChildren().removeAll(leftThresholdLabel, leftLineThreshold);
+        leftBar.getChildren().removeAll(rightThresholdLabel, rightLineThreshold, execTranslateBtn);
+    }
+
+    private void actionBinPrepExecute() {
+        execTranslateBtn.setOnAction(event -> {
+            TranslationAction action = new TranslationAction();
+            int value = Integer.parseInt(leftLineThreshold.getText());
+
+            action.execute();
+            action.executeBinPreparing(value);
+        });
+    }
+
+    private void actionPrepExecute() {
+        execTranslateBtn.setOnAction(event -> {
+            TranslationAction action = new TranslationAction();
+            int left = Integer.parseInt(leftLineThreshold.getText());
+            int right = Integer.parseInt(rightLineThreshold.getText());
+
+            action.execute();
+            action.executePreparing(left, right);
+        });
     }
 }

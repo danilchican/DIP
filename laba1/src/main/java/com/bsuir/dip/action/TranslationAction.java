@@ -2,6 +2,7 @@ package com.bsuir.dip.action;
 
 import com.bsuir.dip.image.Image;
 import com.bsuir.dip.image.ImageConverter;
+import com.bsuir.dip.index.Main;
 
 public class TranslationAction extends Action {
 
@@ -10,38 +11,43 @@ public class TranslationAction extends Action {
 
         if (!isEmptyImage) {
             if (!image.isGrayScale()) {
-                image = ImageConverter.convertToGS(image);
+                Main.window.setLastImage(ImageConverter.convertToGS(new Image(image.getImg().clone())));
             }
 
-            image.show();
+            Main.window.replaceImage();
         }
     }
 
-    public void executePreparing() {
+    public void executePreparing(final int leftThreshold, final int rightThreshold) {
         System.out.println("Execute preparing.");
 
         if (!isEmptyImage) {
-            // TODO Change
-            image = ImageConverter.convertToGS(image);
-            image.show();
+            Main.window.setLastImage(new Image(image.getImg().clone()));
+            Main.window.getLastImage().execPreparing(leftThreshold, rightThreshold);
+
+            Main.window.replaceImage();
         }
     }
 
-    public void executeBinPreparing() {
+    public void executeBinPreparing(int threshold) {
         System.out.println("Execute preparing.");
 
         if (!isEmptyImage) {
-            // TODO Change
-            image = ImageConverter.convertToGS(image);
-            image.show();
+            Main.window.setLastImage(new Image(image.getImg().clone()));
+            Main.window.getLastImage().execBinPreparing(threshold);
+
+            Main.window.replaceImage();
         }
     }
 
     public void executeSobiel() {
         System.out.println("Execute Sobiel.");
 
-        Image img = new Image(image.getImg().clone());
-        img.execSobel();
-        img.show();
+        if (!isEmptyImage) {
+            Main.window.setLastImage(new Image(image.getImg().clone()));
+            Main.window.getLastImage().execSobel();
+
+            Main.window.replaceImage();
+        }
     }
 }

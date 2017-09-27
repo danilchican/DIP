@@ -24,23 +24,5 @@ public class Main extends Application {
     public void start(Stage stage) {
         window = new Window(stage);
         window.show();
-
-        //Image image = new Image(ImageLoader.load("D:/test.png"));
-
-        //image.execBinPreparing(130);
-        //image.execPreparing(80, 130);
-
-        //Image gs = ImageConverter.convertToGS(image);
-
-        //gs.execSobel();
-        //gs.show();
-        //image.showHistogram(Channel.ALL);
-
-//        Image gs = ImageConverter.convertToGS(image);
-//        gs.execBinPreparing(50);
-//        gs.show();
-//        gs.showHistogram(Channel.ALL);
-//
-//        ImageLoader.save("D:/gs.jpg", gs);
     }
 }

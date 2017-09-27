@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Option {
-    VIEW_IMAGE(0, "View Image", null),
+    VIEW_IMAGE(0, "", null),
     VIEW_HIST(1, "View Histogram", new HistogramAction()),
     TRANSLATION(2, "Translate Image", new TranslationAction());
 

@@ -5,6 +5,7 @@ import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.style.Styler;
 
+import javax.swing.*;
 import java.util.List;
 
 public final class ImageHistogram {
@@ -36,7 +37,9 @@ public final class ImageHistogram {
      */
     public void show() {
         CategoryChart chart = getChart();
-        new SwingWrapper<>(chart).displayChart();
+        new SwingWrapper<>(chart)
+                .displayChart()
+                .setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
     private CategoryChart getChart() {

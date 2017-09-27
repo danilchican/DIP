@@ -1,6 +1,7 @@
 package com.bsuir.dip.image;
 
 import com.bsuir.dip.type.Channel;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -71,10 +72,7 @@ public final class ImageConverter {
      */
     public static Image convertToGS(Image image) {
         final Mat oldImage = image.getImg();
-        Mat gsImage = new Mat();
-        oldImage.copyTo(gsImage);
-
-        Imgproc.cvtColor(oldImage, gsImage, Imgproc.COLOR_RGB2GRAY);
+        Mat gsImage = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
 
         final int RED = Channel.RED.getIndex();
         final int GREEN = Channel.GREEN.getIndex();

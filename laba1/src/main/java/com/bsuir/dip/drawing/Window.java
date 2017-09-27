@@ -1,6 +1,8 @@
 package com.bsuir.dip.drawing;
 
 import com.bsuir.dip.action.HistogramAction;
+import com.bsuir.dip.image.Image;
+import com.bsuir.dip.image.ImageLoader;
 import com.bsuir.dip.type.HistogramItem;
 import com.bsuir.dip.type.Option;
 import com.bsuir.dip.action.IAction;
@@ -10,7 +12,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -110,7 +111,7 @@ public class Window {
         leftBar.getChildren().addAll(histogramLabel, histogramsBox);
         leftBar.getChildren().addAll(translateLabel, translationsBox);
 
-        Image image = new Image(DEFAULT_BG_IMAGE_PATH);
+        javafx.scene.image.Image image = new javafx.scene.image.Image(DEFAULT_BG_IMAGE_PATH);
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
 
@@ -127,13 +128,14 @@ public class Window {
             File file = fileChooser.showOpenDialog(stage);
             // TODO change
             if (file.exists()) {
-                image = new Image(FILE_PREFIX + file.getAbsolutePath());
+                javafx.scene.image.Image displayingImage = new javafx.scene.image.Image(FILE_PREFIX + file.getAbsolutePath());
+                this.image = new Image(ImageLoader.load(file.getAbsolutePath()));
 
-                if (image.getWidth() > 300) {
+                if (displayingImage.getWidth() > 300) {
                     imageView.setFitWidth(300);
                 }
 
-                imageView.setImage(image);
+                imageView.setImage(displayingImage);
             }
         });
 
@@ -168,7 +170,7 @@ public class Window {
                     if (t1 != null) {
                         int id = translationsBox.getSelectionModel().getSelectedIndex();
                         Option option = Option.findById(id);
-
+                        // TODO change
                         this.handleByOption(option);
                     }
                 });

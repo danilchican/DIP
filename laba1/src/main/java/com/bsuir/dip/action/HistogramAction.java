@@ -1,14 +1,18 @@
 package com.bsuir.dip.action;
 
 import com.bsuir.dip.drawing.Dialog;
+import com.bsuir.dip.image.Image;
+import com.bsuir.dip.image.ImageConverter;
+import com.bsuir.dip.type.Channel;
 import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 
 import static com.bsuir.dip.index.Main.window;
 
 public class HistogramAction extends Action {
 
     private boolean isEmptyImage = false;
+
+    private Image image;
 
     /**
      * Execute command.
@@ -25,12 +29,20 @@ public class HistogramAction extends Action {
                     Alert.AlertType.WARNING, "Image not selected",
                     null, "Select image to display histogram."
             ).show();
+        } else {
+            this.image = image;
         }
     }
 
     public void executeGS() {
+        System.out.println("Execute GS");
+
         if(!isEmptyImage) {
-            System.out.println("Execute GS");
+            if(!image.isGrayScale()) {
+                image = ImageConverter.convertToGS(image);
+            }
+
+            image.showHistogram(Channel.ALL);
         }
     }
 

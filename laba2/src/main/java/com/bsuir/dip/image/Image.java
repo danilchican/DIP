@@ -1,5 +1,6 @@
 package com.bsuir.dip.image;
 
+import com.bsuir.dip.bean.DetectedItem;
 import com.bsuir.dip.drawing.Imshow;
 import com.bsuir.dip.drawing.ImageHistogram;
 import com.bsuir.dip.type.Channel;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.bsuir.dip.drawing.ImageHistogram.INTERVAL_COUNT;
 import static com.bsuir.dip.drawing.ImageHistogram.X_AXIS_NAME;
@@ -26,6 +28,9 @@ public class Image {
 
     private int[][] pixels;
 
+    private List<DetectedItem> areas;
+    private Map<Integer, DetectedItem> areasMap;
+
     public Image(Mat img) {
         this.img = img;
 
@@ -34,7 +39,12 @@ public class Image {
 
         channels = img.channels();
 
+        areas = new ArrayList<>();
+        areasMap = new HashMap<>();
+
         pixels = ImageConverter.convertToLuminance(this);
+
+        this.modifyLabel();
     }
 
     public Image(Mat img, String title) {
@@ -142,6 +152,41 @@ public class Image {
 
         ImageHistogram histogram = new ImageHistogram(title, map.get(X_AXIS_NAME), map.get(Y_AXIS_NAME));
         histogram.show();
+    }
+
+    /**
+     * Modify label.
+     */
+    public void modifyLabel() {
+        int lbl = 2;
+
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                fillLabel(i, j, lbl++);
+            }
+        }
+    }
+
+    private void fillLabel(int x, int y, int lbl) {
+        if (pixels[x][y] == 1) {
+            pixels[x][y] = lbl;
+
+            if (x > 0) {
+                fillLabel(x - 1, y, lbl);
+            }
+
+            if (x < pixels.length - 1) {
+                fillLabel(x + 1, y, lbl);
+            }
+
+            if (y > 0) {
+                fillLabel(x, y - 1, lbl);
+            }
+
+            if (y < pixels[x].length) {
+                fillLabel(x, y + 1, lbl);
+            }
+        }
     }
 
     private HashMap<String, List<Integer>> calcImageHistogram(Channel channel) {

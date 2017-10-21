@@ -98,16 +98,18 @@ public final class ImageConverter {
      */
     public static int[][] convertToLuminance(Image image) {
         final Mat oldImage = image.getImg();
-        int[][] pixels = new int[image.getHeight()][image.getWidth()];
+        int[][] pixels = new int[image.getWidth()][image.getHeight()];
 
         final int RED = Channel.RED.getIndex();
         final int GREEN = Channel.GREEN.getIndex();
         final int BLUE = Channel.BLUE.getIndex();
 
-        for (int i = 0; i < image.getHeight(); i++) {
-            for (int j = 0; j < image.getWidth(); j++) {
-                double[] pixel = oldImage.get(i, j);
-                double luminance = (0.2126f * pixel[RED] + 0.7152f * pixel[GREEN] + 0.0722f * pixel[BLUE]) / 255;
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                double[] pixel = oldImage.get(j, i);
+                float luminance = (0.2126f * (float)pixel[RED]
+                        + 0.7152f * (float)pixel[GREEN]
+                        + 0.0722f * (float)pixel[BLUE]) / 255;
 
                 pixels[i][j] = (luminance < 0.7) ? 0 : 1;
             }

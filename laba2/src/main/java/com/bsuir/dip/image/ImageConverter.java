@@ -89,4 +89,30 @@ public final class ImageConverter {
 
         return new Image(gsImage);
     }
+
+    /**
+     * Convert image to luminance.
+     *
+     * @param image
+     * @return image
+     */
+    public static int[][] convertToLuminance(Image image) {
+        final Mat oldImage = image.getImg();
+        int[][] pixels = new int[image.getHeight()][image.getWidth()];
+
+        final int RED = Channel.RED.getIndex();
+        final int GREEN = Channel.GREEN.getIndex();
+        final int BLUE = Channel.BLUE.getIndex();
+
+        for (int i = 0; i < image.getHeight(); i++) {
+            for (int j = 0; j < image.getWidth(); j++) {
+                double[] pixel = oldImage.get(i, j);
+                double luminance = (0.2126f * pixel[RED] + 0.7152f * pixel[GREEN] + 0.0722f * pixel[BLUE]) / 255;
+
+                pixels[i][j] = (luminance < 0.7) ? 0 : 1;
+            }
+        }
+
+        return pixels;
+    }
 }

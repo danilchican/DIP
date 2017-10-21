@@ -24,6 +24,8 @@ public class Image {
 
     private int channels = 3;
 
+    private int[][] pixels;
+
     public Image(Mat img) {
         this.img = img;
 
@@ -31,11 +33,17 @@ public class Image {
         height = img.height();
 
         channels = img.channels();
+
+        pixels = ImageConverter.convertToLuminance(this);
     }
 
     public Image(Mat img, String title) {
         this(img);
         this.title = title;
+    }
+
+    public int[][] getPixels() {
+        return pixels;
     }
 
     public Mat getImg() {

@@ -8,7 +8,7 @@ public enum Translation {
 
     EMPTY(0, ""),
     COLORIZE(1, "Colorize image"),
-    GRAYSCALE(2, "GrayScale"),
+    CLASTERIZE(2, "Clasterize"),
     BIN_PREPARING(3, "Binary Preparing"),
     PREPARING(4, "Preparing"),
     SOBIEL(5, "Sobiel operator");

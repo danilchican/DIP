@@ -6,24 +6,26 @@ import com.bsuir.dip.index.Main;
 
 public class TranslationAction extends Action {
 
-    public void executeGS() {
-        System.out.println("Execute translating to GrayScale.");
-
-        if (!isEmptyImage) {
-            if (!image.isGrayScale()) {
-                Main.window.setLastImage(ImageConverter.convertToGS(new Image(image.getImg().clone())));
-            }
-
-            Main.window.replaceImage();
-        }
-    }
-
     public void executeColorize() {
         System.out.println("Execute colorizing image.");
 
         if (!isEmptyImage) {
             Main.window.setLastImage(new Image(image.getImg().clone()));
             Image image = ImageConverter.colorizeImage(Main.window.getLastImage());
+
+            Main.window.setLastImage(image);
+            Main.window.replaceImage();
+        }
+    }
+
+    public void executeClasterize() {
+        System.out.println("Execute clasterizing image.");
+
+        if (!isEmptyImage) {
+            Main.window.setLastImage(new Image(image.getImg().clone()));
+            Main.window.getLastImage().clasterize();
+
+            Image image = ImageConverter.colorizeImageClasters(Main.window.getLastImage());
 
             Main.window.setLastImage(image);
             Main.window.replaceImage();

@@ -150,6 +150,28 @@ public final class ImageConverter {
         return new Image(mat);
     }
 
+    public static Image colorizeImageClasters(Image image) {
+        int[][] pixels = image.getPixels();
+
+        Map<Integer, DetectedItem> areasMap = image.getAreasMap();
+        Mat mat = image.getImg().clone();
+
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                int pix = pixels[i][j];
+
+                if (pix != 0) {
+                    int index = areasMap.get(pix).getClaster();
+
+                    double[] pixel = getRGB(index);
+                    mat.put(j, i, pixel);
+                }
+            }
+        }
+
+        return new Image(mat);
+    }
+
     private static double[] getRGB(int n) {
         Color color;
 

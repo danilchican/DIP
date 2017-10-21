@@ -263,9 +263,9 @@ public class Window {
                 clearTranslationsObject();
                 action.executeColorize();
                 break;
-            case GRAYSCALE:
+            case CLASTERIZE:
                 clearTranslationsObject();
-                action.executeGS();
+                action.executeClasterize();
                 break;
             case BIN_PREPARING:
                 clearTranslationsObject();

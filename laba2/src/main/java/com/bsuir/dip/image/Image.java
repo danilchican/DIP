@@ -7,7 +7,6 @@ import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,9 +45,9 @@ public class Image {
         pixels = ImageConverter.convertToLuminance(this);
 
         this.modifyLabel();
-        this.countSpace();
-        this.countPerimeter();
-        this.countCompactness();
+        this.calcSpace();
+        this.calcPerimeter();
+        this.calcCompactness();
     }
 
     public Image(Mat img, String title) {
@@ -179,7 +178,7 @@ public class Image {
         }
     }
 
-    public void countSpace() {
+    public void calcSpace() {
         Map<Integer, Integer> tempMap = new HashMap<>();
 
         for (int i = 0; i < pixels.length; i++) {
@@ -205,7 +204,7 @@ public class Image {
         System.out.println("Areas size: " + areas.size());
     }
 
-    public void countPerimeter() {
+    public void calcPerimeter() {
         for (int i = 0; i < pixels.length; i++) {
             for (int j = 0; j < pixels[i].length; j++) {
                 if (pixels[i][j] != 0) {
@@ -240,10 +239,66 @@ public class Image {
         }
     }
 
-    public void countCompactness() {
+    public void calcCompactness() {
         for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
             float compactness = (float) Math.pow(entry.getValue().getPerimeter(), 2) / entry.getValue().getSpace();
             entry.getValue().setCompactness(compactness);
+        }
+    }
+
+    /**
+     * Clasterize all objects.
+     */
+    public void clasterize() {
+        int c1 = areas.get(0).getSpace();
+        int c2 = areas.get(5).getSpace();
+
+        int prevC1;
+        int prevC2;
+
+        List<DetectedItem> Claster1 = new ArrayList<>();
+        List<DetectedItem> Claster2 = new ArrayList<>();
+
+        do {
+            Claster1.clear();
+            Claster2.clear();
+
+            for (DetectedItem area : areas) {
+                int diff1 = Math.abs(c1 - area.getSpace());
+                int diff2 = Math.abs(c2 - area.getSpace());
+
+                if (diff1 < diff2) {
+                    Claster1.add(area);
+                } else {
+                    Claster2.add(area);
+                }
+            }
+
+            prevC1 = c1;
+            prevC2 = c2;
+
+            c1 = 0;
+            c2 = 0;
+
+            for (DetectedItem clast1 : Claster1) {
+                c1 += clast1.getSpace();
+            }
+
+            for (DetectedItem clast2 : Claster2) {
+                c2 += clast2.getSpace();
+            }
+
+            c1 = Claster1.size() == 0 ? 0 : c1 / Claster1.size();
+            c2 = Claster2.size() == 0 ? 0 : c2 / Claster2.size();
+        } while (c1 != prevC1 && c2 != prevC2);
+
+        for (DetectedItem area : areas) {
+            if (Claster1.contains(area)) {
+                area.setClaster(1);
+            }
+            if (Claster2.contains(area)) {
+                area.setClaster(2);
+            }
         }
     }
 

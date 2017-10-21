@@ -23,12 +23,14 @@ public class TranslationAction extends Action {
 
         if (!isEmptyImage) {
             Main.window.setLastImage(new Image(image.getImg().clone()));
-            Main.window.getLastImage().clasterize();
+            Image last = Main.window.getLastImage();
+            last.clasterize();
 
             Image image = ImageConverter.colorizeImageClasters(Main.window.getLastImage());
 
             Main.window.setLastImage(image);
             Main.window.replaceImage();
+            Main.window.setLastImage(last);
         }
     }
 

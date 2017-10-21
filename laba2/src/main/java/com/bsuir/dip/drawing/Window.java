@@ -348,7 +348,7 @@ public class Window {
 
     private void fillTableData() {
         Vector<String> columnNames = new Vector<String>() {{
-            add("");
+            add("#");
             add("Space");
             add("Perimeter");
             add("Compactness");
@@ -358,17 +358,18 @@ public class Window {
         }};
 
         Vector<Vector<String>> allData = new Vector<>();
+        Image im = getLastImage();
 
-        for (int i = 0; i < lastImage.getAreas().size(); i++) {
+        for (int i = 0; i < im.getAreas().size(); i++) {
             Vector<String> data = new Vector<>();
 
             data.add(String.valueOf(i + 1));
-            data.add(String.valueOf(lastImage.getAreas().get(i).getSpace()));
-            data.add(String.valueOf(lastImage.getAreas().get(i).getPerimeter()));
-            data.add(String.valueOf(lastImage.getAreas().get(i).getCompactness()));
-            data.add("x: " + String.valueOf(lastImage.getAreas().get(i).getMassCenterX()) +
-                    "; y: " + lastImage.getAreas().get(i).getMassCenterY());
-            data.add(String.valueOf(lastImage.getAreas().get(i).getClaster()));
+            data.add(String.valueOf(im.getAreas().get(i).getSpace()));
+            data.add(String.valueOf(im.getAreas().get(i).getPerimeter()));
+            data.add(String.valueOf(im.getAreas().get(i).getCompactness()));
+            data.add("x: " + String.valueOf(im.getAreas().get(i).getMassCenterX()) +
+                    "; y: " + im.getAreas().get(i).getMassCenterY());
+            data.add(String.valueOf(im.getAreas().get(i).getClaster()));
             data.add(String.valueOf(Image.getColorName(i)));
 
             allData.add(data);

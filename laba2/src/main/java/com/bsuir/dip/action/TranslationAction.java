@@ -30,7 +30,7 @@ public class TranslationAction extends Action {
 
             Main.window.setLastImage(image);
             Main.window.replaceImage();
-            Main.window.setLastImage(last);
+            Main.window.setMidIm(last);
         }
     }
 

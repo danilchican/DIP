@@ -73,6 +73,7 @@ public class Window {
 
     private Image image;
     private Image lastImage;
+    private Image midIm;
 
     private JTable table;
 
@@ -105,6 +106,14 @@ public class Window {
         ObservableList<String> translations = FXCollections.observableArrayList(Translation.getAsArray());
 
         translationsBox = new ComboBox<>(translations);
+    }
+
+    public Image getMidIm() {
+        return midIm;
+    }
+
+    public void setMidIm(Image midIm) {
+        this.midIm = midIm;
     }
 
     public void show() {
@@ -334,7 +343,12 @@ public class Window {
 
     private void showStatistics() {
         System.out.println("Showing statistics");
-        getLastImage().calcMassCenter();
+
+        if(midIm == null) {
+            midIm = getLastImage();
+        }
+
+        midIm.calcMassCenter();
 
         fillTableData();
 
@@ -358,7 +372,7 @@ public class Window {
         }};
 
         Vector<Vector<String>> allData = new Vector<>();
-        Image im = getLastImage();
+        Image im = getMidIm();
 
         for (int i = 0; i < im.getAreas().size(); i++) {
             Vector<String> data = new Vector<>();

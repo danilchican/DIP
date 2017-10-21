@@ -3,8 +3,6 @@ package com.bsuir.dip.drawing;
 import com.bsuir.dip.action.TranslationAction;
 import com.bsuir.dip.image.Image;
 import com.bsuir.dip.image.ImageLoader;
-import com.bsuir.dip.type.Option;
-import com.bsuir.dip.action.IAction;
 import com.bsuir.dip.type.Translation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,7 +56,6 @@ public class Window {
 
     private final ImageView imageView;
 
-    private final Label optionsLabel;
     private final Label translateLabel;
 
     private Label leftThresholdLabel;
@@ -67,7 +64,6 @@ public class Window {
     private TextField leftLineThreshold;
     private TextField rightLineThreshold;
 
-    private final ComboBox optionsBox;
     private final ComboBox translationsBox;
 
     private Image image;
@@ -96,14 +92,9 @@ public class Window {
         rightBar = new VBox();
         mainLayout = new SplitPane();
 
-        optionsLabel = new Label("Options:");
         translateLabel = new Label("Translate:");
 
-        ObservableList<String> options = FXCollections.observableArrayList(Option.getAsArray());
         ObservableList<String> translations = FXCollections.observableArrayList(Translation.getAsArray());
-
-        optionsBox = new ComboBox<>(options);
-        optionsBox.getSelectionModel().selectFirst();
 
         translationsBox = new ComboBox<>(translations);
     }
@@ -122,7 +113,6 @@ public class Window {
     }
 
     private void fillScene() {
-        optionsBox.setDisable(true);
         translationsBox.setDisable(true);
         saveFileBtn.setDisable(true);
         showImageBtn.setDisable(true);
@@ -151,7 +141,6 @@ public class Window {
         rightBar.setPadding(new Insets(LAYOUT_PADDING));
         rightBar.setSpacing(10);
 
-        leftBar.getChildren().addAll(optionsLabel, optionsBox);
         leftBar.getChildren().addAll(translateLabel, translationsBox);
 
         javafx.scene.image.Image image = new javafx.scene.image.Image(DEFAULT_BG_IMAGE_PATH);
@@ -194,7 +183,7 @@ public class Window {
                 }
 
                 imageView.setImage(displayingImage);
-                optionsBox.setDisable(false);
+                translationsBox.setDisable(false);
                 saveFileBtn.setDisable(false);
                 showImageBtn.setDisable(false);
             }
@@ -233,20 +222,6 @@ public class Window {
             }
         });
 
-        optionsBox
-                .getSelectionModel()
-                .selectedItemProperty()
-                .addListener((ov, t, t1) -> {
-                    if (t1 != null) {
-                        int id = optionsBox.getSelectionModel().getSelectedIndex();
-                        Option option = Option.findById(id);
-
-                        this.handleByOption(option);
-                    }
-
-                    clearTranslationsObject();
-                });
-
         translationsBox
                 .getSelectionModel()
                 .selectedItemProperty()
@@ -261,7 +236,7 @@ public class Window {
     }
 
     public void replaceImage() {
-        if(getLastImage() != null && getImage() != getLastImage()) {
+        if (getLastImage() != null && getImage() != getLastImage()) {
             MatOfByte byteMat = new MatOfByte();
             Imgcodecs.imencode(".jpg", getLastImage().getImg(), byteMat);
             javafx.scene.image.Image displayingImage = new javafx.scene.image.Image(new ByteArrayInputStream(byteMat.toArray()));
@@ -275,27 +250,6 @@ public class Window {
         }
     }
 
-    private void handleByOption(Option option) {
-        System.out.println("Selected option: " + option.getTitle());
-
-        switch (option) {
-            case VIEW_IMAGE:
-                translationsBox.setDisable(true);
-                break;
-            case TRANSLATION:
-                translationsBox.setDisable(false);
-                break;
-            default:
-                throw new IllegalArgumentException("Option was not found");
-        }
-
-        IAction action = option.getAction();
-
-        if (action != null) {
-            action.execute();
-        }
-    }
-
     private void handleByTranslateItem(Translation item) {
         System.out.println("Selected translation item: " + item.getTitle());
         TranslationAction action = new TranslationAction();
@@ -304,6 +258,10 @@ public class Window {
         switch (item) {
             case EMPTY:
                 clearTranslationsObject();
+                break;
+            case COLORIZE:
+                clearTranslationsObject();
+                action.executeColorize();
                 break;
             case GRAYSCALE:
                 clearTranslationsObject();

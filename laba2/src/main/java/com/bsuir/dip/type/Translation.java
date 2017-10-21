@@ -7,10 +7,11 @@ import java.util.List;
 public enum Translation {
 
     EMPTY(0, ""),
-    GRAYSCALE(1, "GrayScale"),
-    BIN_PREPARING(2, "Binary Preparing"),
-    PREPARING(3, "Preparing"),
-    SOBIEL(4, "Sobiel operator");
+    COLORIZE(1, "Colorize image"),
+    GRAYSCALE(2, "GrayScale"),
+    BIN_PREPARING(3, "Binary Preparing"),
+    PREPARING(4, "Preparing"),
+    SOBIEL(5, "Sobiel operator");
 
     private int id;
     private String title;

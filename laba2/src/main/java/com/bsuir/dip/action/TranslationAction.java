@@ -18,6 +18,18 @@ public class TranslationAction extends Action {
         }
     }
 
+    public void executeColorize() {
+        System.out.println("Execute colorizing image.");
+
+        if (!isEmptyImage) {
+            Main.window.setLastImage(new Image(image.getImg().clone()));
+            Image image = ImageConverter.colorizeImage(Main.window.getLastImage());
+
+            Main.window.setLastImage(image);
+            Main.window.replaceImage();
+        }
+    }
+
     public void executePreparing(final int leftThreshold, final int rightThreshold) {
         System.out.println("Execute preparing.");
 

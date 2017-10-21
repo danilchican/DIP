@@ -1,9 +1,13 @@
 package com.bsuir.dip.image;
 
+import com.bsuir.dip.bean.DetectedItem;
 import com.bsuir.dip.type.Channel;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Map;
 
 public final class ImageConverter {
 
@@ -107,14 +111,80 @@ public final class ImageConverter {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 double[] pixel = oldImage.get(j, i);
-                float luminance = (0.2126f * (float)pixel[RED]
-                        + 0.7152f * (float)pixel[GREEN]
-                        + 0.0722f * (float)pixel[BLUE]) / 255;
+                float luminance = (0.2126f * (float) pixel[RED]
+                        + 0.7152f * (float) pixel[GREEN]
+                        + 0.0722f * (float) pixel[BLUE]) / 255;
 
                 pixels[i][j] = (luminance < 0.7) ? 0 : 1;
             }
         }
 
         return pixels;
+    }
+
+    /**
+     * Colorize image.
+     *
+     * @param image
+     * @return image
+     */
+    public static Image colorizeImage(Image image) {
+        int[][] pixels = image.getPixels();
+
+        List<DetectedItem> areas = image.getAreas();
+        Map<Integer, DetectedItem> areasMap = image.getAreasMap();
+
+        Mat mat = image.getImg().clone();
+
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                if (pixels[i][j] != 0) {
+                    int n = areas.indexOf(areasMap.get(pixels[i][j]));
+                    double[] pixel = getRGB(n);
+
+                    mat.put(j, i, pixel);
+                }
+            }
+        }
+
+        return new Image(mat);
+    }
+
+    private static double[] getRGB(int n) {
+        Color color;
+
+        switch (n) {
+            case 0:
+                color = Color.orange;
+                break;
+            case 1:
+                color = Color.red;
+                break;
+            case 2:
+                color = Color.blue;
+                break;
+            case 3:
+                color = Color.yellow;
+                break;
+            case 4:
+                color = Color.magenta;
+                break;
+            case 5:
+                color = Color.cyan;
+                break;
+            case 6:
+                color = Color.gray;
+                break;
+            case 7:
+                color = Color.darkGray;
+                break;
+            case 8:
+                color = Color.pink;
+                break;
+            default:
+                color = Color.green;
+        }
+
+        return new double[]{color.getRed(), color.getGreen(), color.getBlue()};
     }
 }

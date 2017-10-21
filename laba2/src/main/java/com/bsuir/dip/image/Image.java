@@ -7,6 +7,7 @@ import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,9 @@ public class Image {
         pixels = ImageConverter.convertToLuminance(this);
 
         this.modifyLabel();
+        this.countSpace();
+        this.countPerimeter();
+        this.countCompactness();
     }
 
     public Image(Mat img, String title) {
@@ -54,6 +58,14 @@ public class Image {
 
     public int[][] getPixels() {
         return pixels;
+    }
+
+    public List<DetectedItem> getAreas() {
+        return areas;
+    }
+
+    public Map<Integer, DetectedItem> getAreasMap() {
+        return areasMap;
     }
 
     public Mat getImg() {
@@ -164,6 +176,74 @@ public class Image {
             for (int j = 0; j < pixels[i].length; j++) {
                 fillLabel(i, j, lbl++);
             }
+        }
+    }
+
+    public void countSpace() {
+        Map<Integer, Integer> tempMap = new HashMap<>();
+
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                if (pixels[i][j] != 0) {
+                    if (tempMap.containsKey(pixels[i][j])) {
+                        tempMap.put(pixels[i][j], tempMap.get(pixels[i][j]) + 1);
+                    } else {
+                        tempMap.put(pixels[i][j], 1);
+                    }
+                }
+            }
+        }
+
+        int i = 0;
+
+        for (Map.Entry<Integer, Integer> entry : tempMap.entrySet()) {
+            areas.add(new DetectedItem(entry.getKey(), entry.getValue()));
+            areasMap.put(entry.getKey(), areas.get(i));
+            i++;
+        }
+
+        System.out.println("Areas size: " + areas.size());
+    }
+
+    public void countPerimeter() {
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                if (pixels[i][j] != 0) {
+                    if (i + 1 < pixels.length) {
+                        if (pixels[i + 1][j] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (j + 1 < pixels[i].length) {
+                        if (pixels[i][j + 1] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (j > 0) {
+                        if (pixels[i][j - 1] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (i > 0) {
+                        if (pixels[i - 1][j] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void countCompactness() {
+        for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
+            float compactness = (float) Math.pow(entry.getValue().getPerimeter(), 2) / entry.getValue().getSpace();
+            entry.getValue().setCompactness(compactness);
         }
     }
 

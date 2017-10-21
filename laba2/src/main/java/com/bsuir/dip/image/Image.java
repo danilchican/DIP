@@ -60,7 +60,7 @@ public class Image {
         return pixels;
     }
 
-    List<DetectedItem> getAreas() {
+    public List<DetectedItem> getAreas() {
         return areas;
     }
 
@@ -241,6 +241,37 @@ public class Image {
         }
         for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
             img.put(entry.getValue().getMassCenterY(), entry.getValue().getMassCenterX(), Color.white.getRed(), Color.white.getGreen(), Color.white.getBlue());
+        }
+    }
+
+    /**
+     * Get color name.
+     *
+     * @param n
+     * @return color name
+     */
+    public static String getColorName(int n) {
+        switch (n) {
+            case 0:
+                return "orange";
+            case 1:
+                return "red";
+            case 2:
+                return "blue";
+            case 3:
+                return "yellow";
+            case 4:
+                return "magenta";
+            case 5:
+                return "cyan";
+            case 6:
+                return "gray";
+            case 7:
+                return "darkGray";
+            case 8:
+                return "pink";
+            default:
+                return "green";
         }
     }
 

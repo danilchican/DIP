@@ -20,8 +20,11 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.Vector;
 
 public class Window {
 
@@ -70,6 +73,8 @@ public class Window {
 
     private Image image;
     private Image lastImage;
+
+    private JTable table;
 
     public Window(Stage stage) {
         this.stage = stage;
@@ -331,6 +336,46 @@ public class Window {
         System.out.println("Showing statistics");
         getLastImage().calcMassCenter();
 
+        fillTableData();
 
+        JFrame frame = new JFrame();
+        frame.add(new JScrollPane(table));
+
+        frame.setTitle("Statistics");
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private void fillTableData() {
+        Vector<String> columnNames = new Vector<String>() {{
+            add("");
+            add("Space");
+            add("Perimeter");
+            add("Compactness");
+            add("MassCenter");
+            add("Claster");
+            add("Color");
+        }};
+
+        Vector<Vector<String>> allData = new Vector<>();
+
+        for (int i = 0; i < lastImage.getAreas().size(); i++) {
+            Vector<String> data = new Vector<>();
+
+            data.add(String.valueOf(i + 1));
+            data.add(String.valueOf(lastImage.getAreas().get(i).getSpace()));
+            data.add(String.valueOf(lastImage.getAreas().get(i).getPerimeter()));
+            data.add(String.valueOf(lastImage.getAreas().get(i).getCompactness()));
+            data.add("x: " + String.valueOf(lastImage.getAreas().get(i).getMassCenterX()) +
+                    "; y: " + lastImage.getAreas().get(i).getMassCenterY());
+            data.add(String.valueOf(lastImage.getAreas().get(i).getClaster()));
+            data.add(String.valueOf(Image.getColorName(i)));
+
+            allData.add(data);
+        }
+
+        table = new JTable(allData, columnNames);
+        table.setRowHeight(26);
+        table.setBounds(WIDTH, HEIGHT, table.getColumnCount() * 80, table.getRowCount() * 28);
     }
 }

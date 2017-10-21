@@ -7,6 +7,7 @@ import com.bsuir.dip.type.Channel;
 import org.opencv.core.Mat;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,15 +56,15 @@ public class Image {
         this.title = title;
     }
 
-    public int[][] getPixels() {
+    int[][] getPixels() {
         return pixels;
     }
 
-    public List<DetectedItem> getAreas() {
+    List<DetectedItem> getAreas() {
         return areas;
     }
 
-    public Map<Integer, DetectedItem> getAreasMap() {
+    Map<Integer, DetectedItem> getAreasMap() {
         return areasMap;
     }
 
@@ -71,15 +72,15 @@ public class Image {
         return img;
     }
 
-    public int getWidth() {
+    int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    int getHeight() {
         return height;
     }
 
-    public boolean isGrayScale() {
+    boolean isGrayScale() {
         return channels == 1;
     }
 
@@ -89,7 +90,7 @@ public class Image {
      * @param channel
      * @return pixels
      */
-    public int[] getChannel(Channel channel) {
+    private int[] getChannel(Channel channel) {
         List<Integer> pixels = new ArrayList<>();
         int index = channel.getIndex();
 
@@ -166,87 +167,6 @@ public class Image {
     }
 
     /**
-     * Modify label.
-     */
-    public void modifyLabel() {
-        int lbl = 2;
-
-        for (int i = 0; i < pixels.length; i++) {
-            for (int j = 0; j < pixels[i].length; j++) {
-                fillLabel(i, j, lbl++);
-            }
-        }
-    }
-
-    public void calcSpace() {
-        Map<Integer, Integer> tempMap = new HashMap<>();
-
-        for (int i = 0; i < pixels.length; i++) {
-            for (int j = 0; j < pixels[i].length; j++) {
-                if (pixels[i][j] != 0) {
-                    if (tempMap.containsKey(pixels[i][j])) {
-                        tempMap.put(pixels[i][j], tempMap.get(pixels[i][j]) + 1);
-                    } else {
-                        tempMap.put(pixels[i][j], 1);
-                    }
-                }
-            }
-        }
-
-        int i = 0;
-
-        for (Map.Entry<Integer, Integer> entry : tempMap.entrySet()) {
-            areas.add(new DetectedItem(entry.getKey(), entry.getValue()));
-            areasMap.put(entry.getKey(), areas.get(i));
-            i++;
-        }
-
-        System.out.println("Areas size: " + areas.size());
-    }
-
-    public void calcPerimeter() {
-        for (int i = 0; i < pixels.length; i++) {
-            for (int j = 0; j < pixels[i].length; j++) {
-                if (pixels[i][j] != 0) {
-                    if (i + 1 < pixels.length) {
-                        if (pixels[i + 1][j] == 0) {
-                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
-                            continue;
-                        }
-                    }
-
-                    if (j + 1 < pixels[i].length) {
-                        if (pixels[i][j + 1] == 0) {
-                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
-                            continue;
-                        }
-                    }
-
-                    if (j > 0) {
-                        if (pixels[i][j - 1] == 0) {
-                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
-                            continue;
-                        }
-                    }
-
-                    if (i > 0) {
-                        if (pixels[i - 1][j] == 0) {
-                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public void calcCompactness() {
-        for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
-            float compactness = (float) Math.pow(entry.getValue().getPerimeter(), 2) / entry.getValue().getSpace();
-            entry.getValue().setCompactness(compactness);
-        }
-    }
-
-    /**
      * Clasterize all objects.
      */
     public void clasterize() {
@@ -299,6 +219,106 @@ public class Image {
             if (Claster2.contains(area)) {
                 area.setClaster(2);
             }
+        }
+    }
+
+    /**
+     * Calculate mass center.
+     */
+    public void calcMassCenter() {
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                if (pixels[i][j] != 0) {
+                    DetectedItem obj = areasMap.get(pixels[i][j]);
+                    obj.setMassCenterX(obj.getMassCenterX() + j);
+                    obj.setMassCenterY(obj.getMassCenterY() + i);
+                }
+            }
+        }
+        for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
+            entry.getValue().setMassCenterX(entry.getValue().getMassCenterX() / entry.getValue().getSpace());
+            entry.getValue().setMassCenterY(entry.getValue().getMassCenterY() / entry.getValue().getSpace());
+        }
+        for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
+            img.put(entry.getValue().getMassCenterY(), entry.getValue().getMassCenterX(), Color.white.getRed(), Color.white.getGreen(), Color.white.getBlue());
+        }
+    }
+
+    private void modifyLabel() {
+        int lbl = 2;
+
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                fillLabel(i, j, lbl++);
+            }
+        }
+    }
+
+    private void calcSpace() {
+        Map<Integer, Integer> tempMap = new HashMap<>();
+
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                if (pixels[i][j] != 0) {
+                    if (tempMap.containsKey(pixels[i][j])) {
+                        tempMap.put(pixels[i][j], tempMap.get(pixels[i][j]) + 1);
+                    } else {
+                        tempMap.put(pixels[i][j], 1);
+                    }
+                }
+            }
+        }
+
+        int i = 0;
+
+        for (Map.Entry<Integer, Integer> entry : tempMap.entrySet()) {
+            areas.add(new DetectedItem(entry.getKey(), entry.getValue()));
+            areasMap.put(entry.getKey(), areas.get(i));
+            i++;
+        }
+
+        System.out.println("Areas size: " + areas.size());
+    }
+
+    private void calcPerimeter() {
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[i].length; j++) {
+                if (pixels[i][j] != 0) {
+                    if (i + 1 < pixels.length) {
+                        if (pixels[i + 1][j] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (j + 1 < pixels[i].length) {
+                        if (pixels[i][j + 1] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (j > 0) {
+                        if (pixels[i][j - 1] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                            continue;
+                        }
+                    }
+
+                    if (i > 0) {
+                        if (pixels[i - 1][j] == 0) {
+                            areasMap.get(pixels[i][j]).setPerimeter(areasMap.get(pixels[i][j]).getPerimeter() + 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void calcCompactness() {
+        for (Map.Entry<Integer, DetectedItem> entry : areasMap.entrySet()) {
+            float compactness = (float) Math.pow(entry.getValue().getPerimeter(), 2) / entry.getValue().getSpace();
+            entry.getValue().setCompactness(compactness);
         }
     }
 

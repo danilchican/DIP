@@ -17,7 +17,7 @@ public final class ImageConverter {
      * @param image to convert
      * @return bytes array
      */
-    public static byte[] convertToBytes(Image image) {
+    private static byte[] convertToBytes(Image image) {
         Mat img = image.getImg();
         byte[] bytes = new byte[(int) (img.total() * img.channels())];
 
@@ -31,7 +31,7 @@ public final class ImageConverter {
      * @param image to convert
      * @return pixels array
      */
-    public static int[] convertToPixels(Image image) {
+    static int[] convertToPixels(Image image) {
         byte[] bytes = convertToBytes(image);
         return convertToPixels(bytes);
     }
@@ -42,7 +42,7 @@ public final class ImageConverter {
      * @param pixels to convert
      * @return bytes array
      */
-    public static byte[] convertToBytes(int[] pixels) {
+    static byte[] convertToBytes(int[] pixels) {
         byte[] bytes = new byte[pixels.length];
 
         for (int i = 0; i < bytes.length; i++) {
@@ -58,7 +58,7 @@ public final class ImageConverter {
      * @param bytes to convert
      * @return pixels array
      */
-    public static int[] convertToPixels(byte[] bytes) {
+    private static int[] convertToPixels(byte[] bytes) {
         int[] pixels = new int[bytes.length];
 
         for (int i = 0; i < bytes.length; i++) {
@@ -69,38 +69,12 @@ public final class ImageConverter {
     }
 
     /**
-     * Convert image to GrayScale.
-     *
-     * @param image
-     * @return
-     */
-    public static Image convertToGS(Image image) {
-        final Mat oldImage = image.getImg();
-        Mat gsImage = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
-
-        final int RED = Channel.RED.getIndex();
-        final int GREEN = Channel.GREEN.getIndex();
-        final int BLUE = Channel.BLUE.getIndex();
-
-        for (int i = 0; i < image.getHeight(); i++) {
-            for (int j = 0; j < image.getWidth(); j++) {
-                double[] pixel = oldImage.get(i, j);
-                double value = 0.3 * pixel[RED] + 0.59 * pixel[GREEN] + 0.11 * pixel[BLUE];
-
-                gsImage.put(i, j, value);
-            }
-        }
-
-        return new Image(gsImage);
-    }
-
-    /**
      * Convert image to luminance.
      *
      * @param image
      * @return image
      */
-    public static int[][] convertToLuminance(Image image) {
+    static int[][] convertToLuminance(Image image) {
         final Mat oldImage = image.getImg();
         int[][] pixels = new int[image.getWidth()][image.getHeight()];
 
@@ -150,6 +124,12 @@ public final class ImageConverter {
         return new Image(mat);
     }
 
+    /**
+     * Colorize image clasters.
+     *
+     * @param image
+     * @return image
+     */
     public static Image colorizeImageClasters(Image image) {
         int[][] pixels = image.getPixels();
 

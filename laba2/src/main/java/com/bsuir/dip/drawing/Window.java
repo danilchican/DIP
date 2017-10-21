@@ -32,6 +32,7 @@ public class Window {
     private static final String OPEN_FILE_BTN_TITLE = "Choose image...";
     private static final String SAVE_FILE_BTN_TITLE = "Save image";
     private static final String EXECUTE_BTN_TITLE = "Execute";
+    private static final String SHOW_STATISTICS_TITLE = "Show Statistics";
     private static final String SHOW_IMAGE_BTN_TITLE = "Show in Window";
 
     private static final String FILE_PREFIX = "file:///";
@@ -53,6 +54,7 @@ public class Window {
     private final Button saveFileBtn;
     private final Button execTranslateBtn;
     private final Button showImageBtn;
+    private final Button showStatisticsBtn;
 
     private final ImageView imageView;
 
@@ -84,6 +86,7 @@ public class Window {
         saveFileBtn = new Button(SAVE_FILE_BTN_TITLE);
         execTranslateBtn = new Button(EXECUTE_BTN_TITLE);
         showImageBtn = new Button(SHOW_IMAGE_BTN_TITLE);
+        showStatisticsBtn = new Button(SHOW_STATISTICS_TITLE);
 
         leftLineThreshold = new TextField();
         rightLineThreshold = new TextField();
@@ -116,6 +119,7 @@ public class Window {
         translationsBox.setDisable(true);
         saveFileBtn.setDisable(true);
         showImageBtn.setDisable(true);
+        showStatisticsBtn.setDisable(true);
 
         leftLineThreshold.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         rightLineThreshold.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
@@ -147,7 +151,7 @@ public class Window {
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
 
-        rightBar.getChildren().addAll(imageView, openFileBtn, saveFileBtn, showImageBtn);
+        rightBar.getChildren().addAll(imageView, openFileBtn, saveFileBtn, showImageBtn, showStatisticsBtn);
         mainLayout.getItems().addAll(leftBar, rightBar);
     }
 
@@ -186,11 +190,16 @@ public class Window {
                 translationsBox.setDisable(false);
                 saveFileBtn.setDisable(false);
                 showImageBtn.setDisable(false);
+                showStatisticsBtn.setDisable(false);
             }
         });
 
         showImageBtn.setOnAction(event -> {
             getLastImage().show();
+        });
+
+        showStatisticsBtn.setOnAction(event -> {
+            showStatistics();
         });
 
         saveFileBtn.setOnAction(event -> {
@@ -316,5 +325,12 @@ public class Window {
             action.execute();
             action.executePreparing(left, right);
         });
+    }
+
+    private void showStatistics() {
+        System.out.println("Showing statistics");
+        getLastImage().calcMassCenter();
+
+
     }
 }

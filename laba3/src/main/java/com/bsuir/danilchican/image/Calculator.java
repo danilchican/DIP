@@ -11,8 +11,8 @@ public class Calculator {
      * @param vec multiple vector
      * @return result vector
      */
-    public int[] mul(int[][] in, int[] vec) {
-        int[] out = new int[NEURONS_COUNT];
+    public static int[] mul(int[][] in, int[] vec) {
+        int[] out = new int[vec.length];
 
         for (int i = 0; i < NEURONS_COUNT; i++) {
             for (int j = 0; j < NEURONS_COUNT; j++) {
@@ -32,7 +32,7 @@ public class Calculator {
     public static int[] executeActivation(int[] in) {
         int[] out = new int[NEURONS_COUNT];
 
-        for(int i = 0; i < NEURONS_COUNT; i++) {
+        for (int i = 0; i < NEURONS_COUNT; i++) {
             out[i] = (in[i] > 0) ? 1 : -1;
         }
 
@@ -49,7 +49,17 @@ public class Calculator {
         int[] out = new int[in.length];
 
         for (int i = 0; i < out.length; i++) {
-            out[i] = (in[i] == 0) ? -1 : 1;
+            out[i] = (in[i] != 0) ? -1 : 1;
+        }
+
+        return out;
+    }
+
+    public static int[] prepareInverseImage(int[] in) {
+        int[] out = new int[in.length];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i] = (in[i] != -1) ? 0 : 255;
         }
 
         return out;

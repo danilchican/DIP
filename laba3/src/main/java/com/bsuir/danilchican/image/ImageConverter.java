@@ -19,6 +19,30 @@ public final class ImageConverter {
     }
 
     /**
+     * Conver image as Mat to pixels as byte array.
+     *
+     * @param img
+     * @return bytes
+     */
+    public static byte[] convertToBytes(Mat img) {
+        byte[] bytes = new byte[(int) (img.total() * img.channels())];
+
+        img.get(0, 0, bytes);
+        return bytes;
+    }
+
+    /**
+     * Convert Mat img to pixels as int array.
+     *
+     * @param img
+     * @return pixels
+     */
+    public static int[] convertToPixels(Mat img) {
+        byte[] bytes = convertToBytes(img);
+        return convertToPixels(bytes);
+    }
+
+    /**
      * Convert Image to pixels as int array.
      *
      * @param image to convert

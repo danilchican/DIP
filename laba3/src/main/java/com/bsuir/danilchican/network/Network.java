@@ -1,5 +1,6 @@
 package com.bsuir.danilchican.network;
 
+import com.bsuir.danilchican.image.Calculator;
 import com.bsuir.danilchican.image.ImageConverter;
 
 import java.io.File;
@@ -49,11 +50,8 @@ public class Network {
      */
     public void initImagesPixels() {
         for (Map.Entry<String, int[]> image : images.entrySet()) {
-            int[] pixels = image.getValue();
-
-            for (int i = 0; i < pixels.length; i++) {
-                pixels[i] = (pixels[i] == 0) ? -1 : 1;
-            }
+            int[] pixels = Calculator.prepareImage(image.getValue());
+            image.setValue(pixels);
         }
     }
 

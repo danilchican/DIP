@@ -7,7 +7,7 @@ public class Calculator {
     /**
      * Multiple vec & matrix.
      *
-     * @param in 
+     * @param in
      * @param vec multiple vector
      * @return result vector
      */
@@ -34,6 +34,22 @@ public class Calculator {
 
         for(int i = 0; i < NEURONS_COUNT; i++) {
             out[i] = (in[i] > 0) ? 1 : -1;
+        }
+
+        return out;
+    }
+
+    /**
+     * Prepare image.
+     *
+     * @param in
+     * @return prepared image
+     */
+    public static int[] prepareImage(int[] in) {
+        int[] out = new int[in.length];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i] = (in[i] == 0) ? -1 : 1;
         }
 
         return out;

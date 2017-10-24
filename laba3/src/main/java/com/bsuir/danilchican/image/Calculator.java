@@ -7,8 +7,8 @@ public class Calculator {
     /**
      * Multiple vec & matrix.
      *
-     * @param in
-     * @param vec
+     * @param in 
+     * @param vec multiple vector
      * @return result vector
      */
     public int[] mul(int[][] in, int[] vec) {
@@ -23,6 +23,12 @@ public class Calculator {
         return out;
     }
 
+    /**
+     * Execute activation function.
+     *
+     * @param in vector
+     * @return result vector
+     */
     public static int[] executeActivation(int[] in) {
         int[] out = new int[NEURONS_COUNT];
 

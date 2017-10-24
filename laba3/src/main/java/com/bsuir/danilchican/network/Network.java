@@ -18,14 +18,9 @@ public class Network {
     public static final int NEURONS_COUNT = 10;
 
     private int[][] teachMatrix = new int[NEURONS_COUNT][NEURONS_COUNT];
-    private int[][] resultMatrix = new int[NEURONS_COUNT][NEURONS_COUNT];
 
     private Map<String, int[]> images = new HashMap<>();
     private Map<String, int[][]> imagesMatrix = new HashMap<>();
-
-    public Network() {
-        init();
-    }
 
     public void loadImages() {
         File file = new File("resources");
@@ -62,17 +57,6 @@ public class Network {
         }
     }
 
-    /**
-     * Setting up start values to teaching matrix.
-     */
-    private void init() {
-        for (int i = 0; i < NEURONS_COUNT; i++) {
-            for (int j = 0; j < NEURONS_COUNT; j++) {
-                teachMatrix[i][j] = (i != j) ? 1 : 0;
-            }
-        }
-    }
-
     private void initImagesMatrix() {
         for (Map.Entry<String, int[]> image : images.entrySet()) {
             final int[][] imgMatrixItem = this.calcImageMatrix(image.getValue()); // do for each other image
@@ -98,7 +82,7 @@ public class Network {
     private void updateResultMatrix(int[][] m) {
         for (int i = 0; i < NEURONS_COUNT; i++) {
             for (int j = 0; j < NEURONS_COUNT; j++) {
-                resultMatrix[i][j] += m[i][j];
+                teachMatrix[i][j] += m[i][j];
             }
         }
     }

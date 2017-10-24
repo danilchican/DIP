@@ -1,7 +1,5 @@
 package com.bsuir.danilchican.image;
 
-import com.bsuir.danilchican.type.Channel;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 public final class ImageConverter {
@@ -61,31 +59,5 @@ public final class ImageConverter {
         }
 
         return pixels;
-    }
-
-    /**
-     * Convert image to GrayScale.
-     *
-     * @param image
-     * @return
-     */
-    public static Image convertToGS(Image image) {
-        final Mat oldImage = image.getImg();
-        Mat gsImage = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
-
-        final int RED = Channel.RED.getIndex();
-        final int GREEN = Channel.GREEN.getIndex();
-        final int BLUE = Channel.BLUE.getIndex();
-
-        for (int i = 0; i < image.getHeight(); i++) {
-            for (int j = 0; j < image.getWidth(); j++) {
-                double[] pixel = oldImage.get(i, j);
-                double value = 0.3 * pixel[RED] + 0.59 * pixel[GREEN] + 0.11 * pixel[BLUE];
-
-                gsImage.put(i, j, value);
-            }
-        }
-
-        return new Image(gsImage);
     }
 }

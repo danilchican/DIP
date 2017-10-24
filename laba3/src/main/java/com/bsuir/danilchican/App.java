@@ -14,7 +14,7 @@ public class App {
 
     public static final String RESOURCES_INDEX = "resources";
     public static final String RES_IMAGES_INDEX = "images";
-    public static final String RES_EXAMPLES_INDEX = "examples";
+    public static final String RES_EXAMPLES_INDEX = "tests";
 
     public static void main(String[] args) {
         Network network = new Network();
@@ -22,7 +22,7 @@ public class App {
         network.loadImages();
         network.teach();
 
-        Mat testImage = ImageLoader.load(RESOURCES_INDEX + "/" + RES_EXAMPLES_INDEX + "/g.bmp");
+        Mat testImage = ImageLoader.load(RESOURCES_INDEX + "/" + RES_EXAMPLES_INDEX + "/g_40.bmp");
         network.verify(ImageConverter.convertToPixels(testImage));
     }
 }

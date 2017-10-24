@@ -80,13 +80,10 @@ public class Network {
 
         pixels = Calculator.prepareInverseImage(pixels);
 
-        Mat img = new Mat(10, 10, CvType.CV_8UC1);
+        Mat img = new Mat(NEURONS_COUNT / 10, NEURONS_COUNT / 10, CvType.CV_8UC1);
         img.put(0, 0, ImageConverter.convertToBytes(pixels));
 
-//        Image image = new Image(img, "");
-//        image.show();
-
-        ImageLoader.save("resources/result.bmp", img, Imgcodecs.CV_IMWRITE_PAM_FORMAT_BLACKANDWHITE);
+        ImageLoader.save("resources/res.bmp", img, Imgcodecs.CV_IMWRITE_PAM_FORMAT_BLACKANDWHITE);
     }
 
     /**

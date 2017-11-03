@@ -32,6 +32,15 @@ public class Image {
     private List<DetectedItem> areas;
     private Map<Integer, DetectedItem> areasMap;
 
+    private static boolean flag = true;
+
+
+
+
+
+
+
+
     public Image(Mat img) {
         this.img = img;
 
@@ -42,6 +51,8 @@ public class Image {
 
         areas = new ArrayList<>();
         areasMap = new HashMap<>();
+
+        if(!flag) pixels = ImageConverter.medianFilter(this);
 
         pixels = ImageConverter.convertToLuminance(this);
 

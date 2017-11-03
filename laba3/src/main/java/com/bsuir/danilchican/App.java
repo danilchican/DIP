@@ -22,7 +22,7 @@ public class App {
         network.loadImages();
         network.teach();
 
-        Mat testImage = ImageLoader.load(RESOURCES_INDEX + "/" + RES_EXAMPLES_INDEX + "/g_40.bmp");
+        Mat testImage = ImageLoader.load(RESOURCES_INDEX + "/" + RES_EXAMPLES_INDEX + "/m_20.bmp");
         network.verify(ImageConverter.convertToPixels(testImage));
     }
 }

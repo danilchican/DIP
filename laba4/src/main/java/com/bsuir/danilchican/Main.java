@@ -20,7 +20,6 @@ public class Main {
     private static final int PIXELS_PER_IMAGE = 10 * 10;
     private static final int EPOCH_NUM = 1000;
 
-
     public static void main(String[] args) {
         /* Neurons count should be less than images count! */
         NeuralNetwork network = new NeuralNetwork(NEURONS, PIXELS_PER_IMAGE, EPOCH_NUM);

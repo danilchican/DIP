@@ -1,6 +1,7 @@
 package com.bsuir.danilchican.network;
 
 import com.bsuir.danilchican.Main;
+import com.bsuir.danilchican.image.Calculator;
 import com.bsuir.danilchican.image.ImageConverter;
 import com.bsuir.danilchican.image.ImageLoader;
 import org.opencv.core.Mat;
@@ -17,6 +18,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import static com.bsuir.danilchican.Main.DELIMITER;
+import static com.bsuir.danilchican.image.Calculator.normalize;
 
 public class NeuralNetwork {
 
@@ -71,37 +73,45 @@ public class NeuralNetwork {
      * Learn network.
      */
     public void learn() {
-        for (int epoch = 0; epoch < epochNum; epoch++) {
+        for (int epoch = 0; epoch < epochNum; epoch++) { // learn iteration
             double maxEuclideanDistance = 0;
 
-            for(Map.Entry<String, int[]> image : images.entrySet()) {
+            for (Map.Entry<String, int[]> image : images.entrySet()) {
                 double[] pixels = ImageConverter.convertToPixelsAsDouble(image.getValue());
                 pixels = normalize(pixels);
 
-                // learn iteration
+                int vinJ = 0;
+                double minValue = 0;
+
+                boolean firstStep = true;
+
+                for (int j = 0; j < weights.length; j++) {
+                    double sum = Calculator.euclideanDistance(pixels, weights[j]) * neuronWins[j];
+
+                    if (minValue > sum || firstStep) {
+                        minValue = sum;
+                        vinJ = j;
+                        firstStep = false;
+                    }
+                }
+
+                neuronWins[vinJ]++;
+
+                /* Change weights by formula */
+                changeWeights(vinJ, pixels);
+
+                double currentEuclideanDistance = Calculator.euclideanDistance(pixels, weights[vinJ]);
+
+                if (currentEuclideanDistance > maxEuclideanDistance) {
+                    maxEuclideanDistance = currentEuclideanDistance;
+                }
             }
 
             if (maxEuclideanDistance < EXP) {
+                System.out.println("Max Euclidean distance < exponent : " + maxEuclideanDistance + " < " + EXP);
                 break;
             }
         }
-    }
-
-    /**
-     * Vector normalization.
-     *
-     * @param in source vector
-     * @return normalized vector
-     */
-    public double[] normalize(double[] in) {
-        double[] out = new double[in.length];
-        double inSum = Arrays.stream(in).sum();
-
-        for (int i = 0; i < out.length; i++) {
-            out[i] = in[i] / inSum;
-        }
-
-        return out;
     }
 
     private void fillWeights() {
@@ -113,5 +123,13 @@ public class NeuralNetwork {
             weights[i] = normalize(weights[i]);
             neuronWins[i] = 1;
         }
+    }
+
+    private void changeWeights(int j, double[] pixels) {
+        for (int i = 0; i < pixelsPerImage; i++) {
+            weights[j][i] = weights[j][i] + learnSpeed * (pixels[i] - weights[j][i]);
+        }
+
+        weights[j] = normalize(weights[j]);
     }
 }

@@ -1,8 +1,27 @@
 package com.bsuir.danilchican.image;
 
+import java.util.Arrays;
+
 import static com.bsuir.danilchican.Main.NEURONS;
 
 public class Calculator {
+
+    /**
+     * Normalize vector.
+     *
+     * @param in input vector
+     * @return output normalized vector
+     */
+    public static double[] normalize(double[] in) {
+        double[] out = new double[in.length];
+        double inSum = Arrays.stream(in).sum();
+
+        for (int i = 0; i < out.length; i++) {
+            out[i] = in[i] / inSum;
+        }
+
+        return out;
+    }
 
     /**
      * Calculate Euclidean distance.
@@ -20,7 +39,6 @@ public class Calculator {
 
         return Math.sqrt(sum);
     }
-
 
     /**
      * Multiple vec & matrix.

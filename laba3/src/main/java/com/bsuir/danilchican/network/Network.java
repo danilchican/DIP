@@ -1,15 +1,12 @@
 package com.bsuir.danilchican.network;
 
 import com.bsuir.danilchican.image.Calculator;
-import com.bsuir.danilchican.image.Image;
 import com.bsuir.danilchican.image.ImageConverter;
 import com.bsuir.danilchican.image.ImageLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

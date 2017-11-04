@@ -84,4 +84,20 @@ public final class ImageConverter {
 
         return pixels;
     }
+
+    /**
+     * Convert image pixels from int to double array.
+     *
+     * @param in to convert
+     * @return out array
+     */
+    public static double[] convertToPixelsAsDouble(int[] in) {
+        double[] out = new double[in.length];
+
+        for (int i = 0; i < in.length; i++) {
+            out[i] = (double) in[i];
+        }
+
+        return out;
+    }
 }

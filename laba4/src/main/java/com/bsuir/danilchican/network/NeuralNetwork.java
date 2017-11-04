@@ -113,6 +113,19 @@ public class NeuralNetwork {
         }
     }
 
+    public void showLearnedData() {
+        System.out.println("Source data:");
+        int i = 0;
+
+        for(Map.Entry<String, int[]> image : images.entrySet()) {
+            String name = image.getKey();
+            double[] pixels = ImageConverter.convertToPixelsAsDouble(image.getValue());
+
+            int clusterIndex = findClusterIndex(pixels);
+            System.out.println(++i + ". " + name + ": cluster = " + clusterIndex);
+        }
+    }
+
     /**
      * Find cluster number for image.
      *

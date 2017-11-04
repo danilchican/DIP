@@ -31,8 +31,12 @@ public class Main {
 
         network.loadImages();
         network.learn();
+        network.showLearnedData();
 
-//        Mat testImage = ImageLoader.load(RESOURCES_INDEX + DELIMITER + RES_EXAMPLES_INDEX + DELIMITER + "m_20.bmp");
-//        network.verify(ImageConverter.convertToPixels(testImage));
+        Mat testImage = ImageLoader.load(RESOURCES_INDEX + DELIMITER + RES_EXAMPLES_INDEX + DELIMITER + "1.bmp");
+        int[] pixels = ImageConverter.convertToPixels(testImage);
+
+        int clusterIndex = network.findClusterIndex(ImageConverter.convertToPixelsAsDouble(pixels));
+        System.out.println("1. images/1.bmp: cluster = " + clusterIndex);
     }
 }

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -112,6 +111,34 @@ public class NeuralNetwork {
                 break;
             }
         }
+    }
+
+    /**
+     * Find cluster number for image.
+     *
+     * @param image
+     * @return cluster number
+     */
+    public int findClusterIndex(double[] image) {
+        int clusterIndex = 0;
+
+        double max = 0;
+        double[] normalized = normalize(image);
+
+        for (int j = 0; j < weights.length; j++) {
+            double sum = 0;
+
+            for (int i = 0; i < normalized.length; i++) {
+                sum += normalized[i] * weights[j][i];
+            }
+
+            if (sum > max) {
+                max = sum;
+                clusterIndex = j;
+            }
+        }
+
+        return clusterIndex;
     }
 
     private void fillWeights() {

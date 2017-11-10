@@ -79,7 +79,7 @@ public class NeuralNetwork {
                 double[] pixels = ImageConverter.convertToPixelsAsDouble(image.getValue());
                 pixels = normalize(pixels);
 
-                int vinJ = 0;
+                int winJ = 0;
                 double minValue = 0;
 
                 boolean firstStep = true;
@@ -89,17 +89,17 @@ public class NeuralNetwork {
 
                     if (minValue > sum || firstStep) {
                         minValue = sum;
-                        vinJ = j;
+                        winJ = j;
                         firstStep = false;
                     }
                 }
 
-                neuronWins[vinJ]++;
+                neuronWins[winJ]++;
 
                 /* Change weights by formula */
-                changeWeights(vinJ, pixels);
+                changeWeights(winJ, pixels);
 
-                double currentEuclideanDistance = Calculator.euclideanDistance(pixels, weights[vinJ]);
+                double currentEuclideanDistance = Calculator.euclideanDistance(pixels, weights[winJ]);
 
                 if (currentEuclideanDistance > maxEuclideanDistance) {
                     maxEuclideanDistance = currentEuclideanDistance;

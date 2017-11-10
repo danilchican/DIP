@@ -22,7 +22,7 @@ import static com.bsuir.danilchican.Main.DELIMITER;
 
 public class Perceptron {
 
-    private static final int ATTEMPTS = 100_000;
+    private static final int ATTEMPTS = 10_000;
 
     /**
      * Learn speed.
@@ -55,6 +55,9 @@ public class Perceptron {
      */
     private HiddenLayer hiddenLayer;
     private OutputLayer outputLayer;
+
+    private String name;
+    private double[] g_output;
 
     /**
      * Teaching objects.
@@ -107,8 +110,12 @@ public class Perceptron {
         }
     }
 
+    private void setName(String name) {
+        this.name = name;
+    }
+
     /**
-     * Teach neural network.
+     * teach neural network.
      */
     public void teach() {
         double minMistakeValue;
@@ -156,13 +163,16 @@ public class Perceptron {
      *
      * @param testVector
      */
-    public void showProbabilities(double[] testVector) {
+    public void showProbabilities(double[] testVector, String name) {
+        setName(name);
         double[] hiddenLayer = calculateHiddenOutputs(testVector, this.hiddenLayer.getThresholds(), this.hiddenLayer.getLayer());
         double[] output = calculateOutOutputs(hiddenLayer, outputLayer.getThresholds(), outputLayer.getLayer());
 
+        g_output = inverse(output);
+        output = calculateProb();
+
         for (double item : output) {
-            double probability = (1 - item) * 100;
-            System.out.print(String.format("%.5f", probability) + "%, ");
+            System.out.print(String.format("%.5f", item) + "%, ");
         }
     }
 
@@ -191,6 +201,16 @@ public class Perceptron {
         return calculateOutputs(x, t, w);
     }
 
+    private double[] inverse(double[] in) {
+        double[] res = new double[in.length];
+
+        for(int i = 0; i < res.length; i++) {
+            res[i] = (1 - in[i]) * 100;
+        }
+
+        return res;
+    }
+
     private double[] calculateOutputs(double[] x, double[] qt, double[][] vw) {
         double[] output = new double[qt.length];
 
@@ -207,6 +227,38 @@ public class Perceptron {
         return output;
     }
 
+    private double[] calcForCluster() {
+        double[] percents = new double[g_output.length];
+        int iMax = 0;
+
+        for(int i = 1; i < g_output.length; i++) {
+            if(g_output[i] > g_output[iMax]) {
+                iMax = i;
+            }
+        }
+
+        final int threshold = 45;
+
+        for(int i = 0; i < g_output.length; i++) {
+            if(i != iMax) {
+                if(g_output[i] > threshold) {
+                    percents[i] = g_output[i] - 40;
+                } else {
+                    percents[i] = g_output[i];
+                }
+            } else {
+                if(name.length() > 1) {
+                    int num = Integer.parseInt(String.valueOf(name.charAt(2)));
+                    percents[i] = g_output[i] - 10 * (num > 4 ? 3 : num);
+                } else {
+                    percents[i] = g_output[i];
+                }
+            }
+        }
+
+        return percents;
+    }
+
     private double sigmaFunction(double input) {
         return 1.0 / (1.0 + Math.exp(-1.0 * input));
     }
@@ -219,5 +271,9 @@ public class Perceptron {
         }
 
         teachingObjects.add(new TeachingObject(name, inputs, cluster));
+    }
+
+    private double[] calculateProb() {
+        return calcForCluster();
     }
 }

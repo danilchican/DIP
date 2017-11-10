@@ -2,21 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15f43f00-7657-4f47-9375-60f2a68b6e59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/tests/1.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/tests/2.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/tests/3.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/tests/4.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/tests/5.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/resources/tests/1.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/resources/tests/2.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/resources/tests/3.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/resources/tests/4.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/resources/tests/5.bmp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/network/TeachingObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/util/ClusterIncrementator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../laba5/plot.dat" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/images/1.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/images/1.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/images/2.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/images/2.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/images/3.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/images/3.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/images/4.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/images/4.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/images/5.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/images/5.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/1.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/1.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/1_10.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/1_10.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/1_25.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/1_25.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/1_50.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/1_50.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/2.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/2.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/2_10.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/2_10.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/2_25.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/2_25.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/2_50.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/2_50.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/3.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/3.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/3_10.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/3_10.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/3_25.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/3_25.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/3_50.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/3_50.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/4.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/4.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/4_10.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/4_10.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/4_25.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/4_25.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/4_50.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/4_50.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/5.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/5.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/5_10.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/5_10.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/5_25.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/5_25.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/resources/tests/5_50.bmp" afterPath="$PROJECT_DIR$/../laba5/resources/tests/5_50.bmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/network/NeuralNetwork.java" afterPath="$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/network/NeuralNetwork.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/Main.java" afterPath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/network/Perceptron.java" afterPath="$PROJECT_DIR$/../laba5/src/main/java/com/bsuir/danilchican/network/Perceptron.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,14 +53,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="49" column="5" selection-start-line="36" selection-start-column="0" selection-end-line="49" selection-end-column="5" />
+            <state relative-caret-position="100">
+              <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NeuralNetwork.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/network/NeuralNetwork.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -56,15 +82,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="4.bmp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/images/4.bmp">
+      <file leaf-file-name="2.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/images/2.bmp">
           <provider selected="true" editor-type-id="images">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="5.bmp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/images/5.bmp">
+      <file leaf-file-name="4_50.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/4_50.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1_25.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/1_25.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2_10.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/2_10.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1_50.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/1_50.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2_25.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/2_25.bmp">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2_50.bmp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/tests/2_50.bmp">
           <provider selected="true" editor-type-id="images">
             <state />
           </provider>
@@ -148,6 +209,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -166,18 +229,108 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="danilchican" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="danilchican" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laba4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laba5" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -605,24 +758,26 @@
       <workItem from="1509793582903" duration="750000" />
       <workItem from="1510080366445" duration="2421000" />
       <workItem from="1510085106397" duration="602000" />
+      <workItem from="1510149910114" duration="1625000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15239000" />
+    <option name="totallyTimeSpent" value="16864000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3971061" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -631,13 +786,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3984496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -669,6 +823,31 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/1.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/4.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/5.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -739,7 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -852,35 +1030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/tests/1_25.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/tests/1_50.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/tests/1_10.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/images/2.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/network/NeuralNetwork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="135" column="29" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -894,22 +1043,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/tests/2_50.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/images/1.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/images/5.bmp">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/tests/4_50.bmp">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -924,13 +1058,71 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/3.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/1_10.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/1_50.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/1_25.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/2_10.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/2_25.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/2_50.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/1.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/2.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/tests/4_50.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="49" column="5" selection-start-line="36" selection-start-column="0" selection-end-line="49" selection-end-column="5" />
+        <state relative-caret-position="100">
+          <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bsuir/danilchican/network/NeuralNetwork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

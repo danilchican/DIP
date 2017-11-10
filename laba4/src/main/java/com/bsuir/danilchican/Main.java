@@ -21,9 +21,9 @@ public class Main {
     public static final String RES_IMAGES_INDEX = "images";
     public static final String RES_EXAMPLES_INDEX = "tests";
 
-    public static final int NEURONS = 3;
+    public static final int NEURONS = 5;
     private static final int PIXELS_PER_IMAGE = 10 * 10;
-    private static final int EPOCH_NUM = 10_000;
+    private static final int EPOCH_NUM = 1_000_000;
     private static final double LEARN_SPEED = 0.01;
 
     public static void main(String[] args) {

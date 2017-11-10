@@ -21,13 +21,13 @@ public class Main {
     public static final String RES_IMAGES_INDEX = "images";
     private static final String RES_EXAMPLES_INDEX = "tests";
 
-    private static final int PIXELS_PER_IMAGE = 10 * 10;
+    private static final int PIXELS_PER_IMAGE = 6 * 6;
     private static final int INPUT_NEURONS = PIXELS_PER_IMAGE;
     private static final int OUTPUT_NEURONS = 5;
 
     private static final double ALPHA = 1.0;
     private static final double BETA = 2.5;
-    private static final double MISTAKE_DISTANCE = 0.00000001;
+    private static final double MISTAKE_DISTANCE = 0.0000001;
 
     public static void main(String[] args) {
         Perceptron network = new Perceptron(ALPHA, BETA, INPUT_NEURONS, OUTPUT_NEURONS, MISTAKE_DISTANCE);
@@ -48,7 +48,7 @@ public class Main {
             int[] pixels = ImageConverter.convertToPixels(testImage);
             double[] pixelsAsDouble = ImageConverter.convertToPixelsAsDouble(pixels);
 
-            network.showProbabilities(pixelsAsDouble);
+            network.showProbabilities(pixelsAsDouble, cmd);
         } while (!"exit".equals(cmd));
     }
 }
